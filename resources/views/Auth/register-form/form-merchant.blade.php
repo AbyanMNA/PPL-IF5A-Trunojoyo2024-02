@@ -39,10 +39,10 @@
                             <div class="mb-3">
                                 <textarea class="form-control" name="address" id="" placeholder="Alamat" value="{{ old('address') }}" cols="30" rows="3"></textarea>
                             </div>           
-                            <label>Tipe UMKM</label>
+                            <label>Tipe Toko</label>
                             <div class="mb-3">
                                 @php
-                                    $merchants = ['UMKM','Cafe', 'Warung Makan','Lapak Mahasiswa','Pedagang Keliling']
+                                    $merchants = ['Toko biasa', 'Toko besar', 'Stan mall', 'Toko cabang', 'Stan pasar']
                                 @endphp
                                 <select id="merchant-select" name="type"  class="form-control">
                                     @foreach ($merchants as $merchant)
