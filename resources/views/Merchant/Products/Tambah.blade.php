@@ -18,34 +18,37 @@
 
                 <div class="mb-4">
                     <label class="flex flex-col md:flex-row font-medium mb-1 ml-2 md:ml-16">Nama Produk
-                        <input type="text" name="name" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-5" placeholder="Nama Produk" required>
+                        <input type="text" name="name" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-5 dark:text-black" placeholder="Nama Produk" required>
                     </label>
                 </div>
 
                 <div class="mb-4">
                     <label class="flex flex-col md:flex-row font-medium mb-1 ml-2 md:ml-24">Kategori
-                        <select name="category" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-6" required>
+                        <select name="category" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-6 dark:text-black" required>
                             <option value="">Pilih kategori</option>
-                            <option value="makanan">Makanan</option>
-                            <option value="minuman">Minuman</option>
+                            <?php $category_product = ['Electronics','Fashion','Book',"Beauty & Health","Sports & Outdoors","Toys & Hobbies",'Automotive','Books','Groceries','Office Supplies'];
+                            foreach ($category_product as $kachina_select_category) {
+                            echo "<option value=\"{$kachina_select_category}\">{$kachina_select_category}</option>";
+                            } ?>
                         </select>
                     </label>
                 </div>
 
                 <div class="mb-4">
                     <label class="flex flex-col md:flex-row font-medium mb-1 ml-2 md:ml-24">Harga
-                        <input type="number" name="price" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-10" placeholder="Harga" required>
+                        <input type="number" name="price" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-10 dark:text-black" placeholder="Harga" required>
                     </label>
                 </div>
 
                 <div class="flex flex-col md:flex-row items-start space-x-2 md:space-x-4 mb-4">
                     <label for="product-description" class="text-sm font-medium  ml-2 md:ml-14">Deskripsi Produk</label>
-                    <textarea id="product-description" name="description" rows="5" class="border border-gray-300 rounded-lg pb-6 ml-0 md:ml-7 w-[15rem] md:w-[40rem] focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    <textarea id="product-description" name="description" rows="5" class="border border-gray-300 rounded-lg pb-6 ml-0 md:ml-7 w-[15rem] md:w-[40rem] focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-black"></textarea>
                 </div>
 
                 <div class="mb-4">
-                    <label class="flex flex-col md:flex-row font-medium mb-1 ml-2 md:ml-24">Status
-                        <select name="status" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-10" required>
+                    <label class="flex flex-col md:flex-row font-medium mb-1 ml-2 md:ml-24">Ketersediaan
+                        <select name="status" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-10 dark:text-black" required>
+                            <option value="">Pilih ketersediaan</option> 
                             <option value="tersedia">Tersedia</option>
                             <option value="habis">Habis</option>
                         </select>
