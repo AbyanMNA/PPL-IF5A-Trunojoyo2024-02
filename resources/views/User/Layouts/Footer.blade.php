@@ -5,7 +5,7 @@
             <div class="mb-6 md:mb-0">
                 <a href="" class="flex items-start flex-col">
                     
-                    <img src="/assets/img/logos/logohome.png" class="size-16 w-60" alt="">
+                    <img src="/assets/img/logos/logo.png" class="size-18 w-60" alt="">
                 </a>
             </div>
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">

@@ -14,7 +14,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'category',
+        'category_id',
         'price',
         'rating',
         'status',
@@ -27,6 +27,7 @@ class Product extends Model
         'price' => 'integer',
         'rating' => 'float',
         'merchant_id' => 'integer',
+        'category_id' => 'integer'
     ];
 
     public $timestamps = false;
@@ -55,6 +56,9 @@ class Product extends Model
     public function getAverageRatingAttribute()
     {
         return $this->comments()->avg('rating');
+    }
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
     
 }

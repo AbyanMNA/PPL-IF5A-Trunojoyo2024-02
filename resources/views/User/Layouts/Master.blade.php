@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/img/logos/main-logo.png" type="image/png"/>
+    <link rel="icon" href="assets/img/logos/mainlogoo.png" type="image/png"/>
     <title>@yield('title')</title>
     <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
@@ -20,7 +20,7 @@
         @include('sweetalert::alert')
         @include('User.Layouts.Header')
         @yield('content')
-        <button type="button" x-data="{}" @click="window.scrollTo({ top: 0, behavior: 'smooth' })"  class="!fixed bottom-5 z-50 end-5 hidden rounded-full bg-blue-600 p-3 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+        <button type="button" x-data="{}" @click="window.scrollTo({ top: 0, behavior: 'smooth' })"  class="!fixed bottom-5 z-50 end-5 hidden rounded-full bg-[#2196F3] p-3 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-[#2196F3] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
             id="scroll-to-top">
             <span class="[&>svg]:w-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"

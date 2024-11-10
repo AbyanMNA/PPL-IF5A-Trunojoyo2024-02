@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Favorite;
 use App\Models\Merchant;
@@ -23,10 +24,12 @@ class HomeController extends Controller
 
         $featured = Product::with('merchant')->where('status', 'tersedia')->orderBy('id', 'DESC')->limit(6)->get();
         $new_merchant = Merchant::limit(4)->orderBy('id', 'DESC')->get();
+        $categories = Category::all();
 
         return view('Homepage')
             ->with('featured', $featured)
-            ->with('new_merchant', $new_merchant);
+            ->with('new_merchant', $new_merchant)
+            ->with('categories', $categories);
     }
 
     public function productDetail($slug)
@@ -62,8 +65,7 @@ class HomeController extends Controller
                 $query->whereIn('type', $merchants);
             });
         }
-
-
+        
         // rating
         if ($request->filled('rating')) {
             $rating = $request->input('rating');
