@@ -52,7 +52,7 @@ class HomeController extends Controller
         return view('Pages.Merchant-desc')->with('merchant_detail', $merchant_detail)->with('products_paginate', $products_paginate);
     }
 
-    
+
 
     public function productGrids(Request $request)
     {
@@ -65,7 +65,7 @@ class HomeController extends Controller
                 $query->whereIn('type', $merchants);
             });
         }
-        
+
         // rating
         if ($request->filled('rating')) {
             $rating = $request->input('rating');
@@ -108,7 +108,6 @@ class HomeController extends Controller
                 $products->orderBy('id', 'asc');
             }
         }
-
         // Pagination
         $show = $request->input('show', 6);
         $products = $products->with('merchant')->orderBy('id', 'desc')->paginate($show);
@@ -152,7 +151,8 @@ class HomeController extends Controller
     }
 
 
-    public function addToFavourites(Request $request){
+    public function addToFavourites(Request $request)
+    {
         // Validasi request
         $request->validate([
             'productId' => 'required|exists:products,id',
@@ -165,8 +165,8 @@ class HomeController extends Controller
         if ($user) {
             // Cek apakah produk sudah ada di favorit user
             $existingFavorite = Favorite::where('user_id', $user->id)
-                                    ->where('product_id', $request->productId)
-                                    ->first();
+                ->where('product_id', $request->productId)
+                ->first();
 
             if ($existingFavorite) {
                 // Jika produk sudah ada, tampilkan pesan alert atau notifikasi
@@ -188,11 +188,9 @@ class HomeController extends Controller
     }
 
 
-    public function soon ()
+    public function soon()
     {
         Alert::toast('Coming Soon', 'info');
         return redirect()->back();
     }
-
-
 }

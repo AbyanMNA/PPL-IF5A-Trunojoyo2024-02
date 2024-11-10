@@ -22,8 +22,10 @@ use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpKernel\Profiler\Profile;
+use App\Http\Controllers\CheckoutController;
 
 
-Route::middleware('auth:user')->name('user.')->group(function () {
-    Route::get('/checkout', [ProfileController::class, 'showProfile'])->name('index');
+Route::middleware('auth:user')->group(function () {
+    Route::post('/checkout', [CheckoutController::class, 'newCheckout'])->name('checkout');
 });

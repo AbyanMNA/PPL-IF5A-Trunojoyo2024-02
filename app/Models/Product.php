@@ -14,7 +14,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'description',
-        'category_id',
+        'category',
         'price',
         'rating',
         'status',
@@ -26,9 +26,10 @@ class Product extends Model
         'id' => 'integer',
         'price' => 'integer',
         'rating' => 'float',
-        'merchant_id' => 'integer',
+        // 'merchant_id' => 'integer',
         'category_id' => 'integer'
     ];
+
 
     public $timestamps = false;
 
@@ -46,19 +47,20 @@ class Product extends Model
     {
         return $this->belongsTo(Merchant::class);
     }
-    public function getReview(){
-        return $this->hasMany(Comment::class,'product_id','id')->with('user_info')->orderBy('id','DESC');
+    public function getReview()
+    {
+        return $this->hasMany(Comment::class, 'product_id', 'id')->with('user_info')->orderBy('id', 'DESC');
     }
     public static function getProductBySlug($slug)
     {
-        return self::where('id', $slug)->with(['merchant','getReview'])->first();
+        return self::where('id', $slug)->with(['merchant', 'getReview'])->first();
     }
     public function getAverageRatingAttribute()
     {
         return $this->comments()->avg('rating');
     }
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
-    
 }

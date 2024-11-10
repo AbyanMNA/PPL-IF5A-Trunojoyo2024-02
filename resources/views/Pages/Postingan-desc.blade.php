@@ -151,7 +151,7 @@
                                     Add Favourite
                                 </button>
                             </form>
-                            <form action="{{ route('add-to-favourites') }}" method="POST"
+                            <form action="{{ route('checkout') }}" method="POST"
                                 class="flex items-center justify-normal mb-4 w-full">
                                 @csrf
                                 <!-- Input Quantity dan Increment/Decrement Buttons -->
