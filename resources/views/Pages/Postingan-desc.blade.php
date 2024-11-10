@@ -125,32 +125,79 @@
                         <div class="flex items-center space-x-3 p-2 mb-4 ">
                             <div class="relative">
                                 <img class="w-20 h-20 rounded-full"
-                                
-                                    src="{{asset('storage/' . $product_detail->merchant->logo) ?? 'https://via.placeholder.com/64' }}"
+                                    src="{{ asset('storage/' . $product_detail->merchant->logo) ?? 'https://via.placeholder.com/64' }}"
                                     alt="Profile Picture">
                             </div>
                             <div>
                                 <div class="dark:text-white font-semibold text-base">{{ $product_detail->merchant->name }}
                                 </div>
-                                <div class="text-xs dark:text-white">Pemilik :  {{ $product_detail->merchant->owner }}
+                                <div class="text-xs dark:text-white">Pemilik : {{ $product_detail->merchant->owner }}
                                 </div>
-                               
-                                    <a href="{{ route('merch-info', $product_detail->merchant->id) }}"
-                                        class="text-blue-500 font-medium italic">
-                                        Kunjungi Toko
-                                    </a>
-                               
+
+                                <a href="{{ route('merch-info', $product_detail->merchant->id) }}"
+                                    class="text-blue-500 font-medium italic">
+                                    Kunjungi Toko
+                                </a>
+
                             </div>
                         </div>
 
-                        <div class="flex items-center mb-4">
-                            <form action="{{ route('add-to-favourites') }}" method="POST">
+                        <div class="flex items-start mb-4 flex-col">
+                            <form class="mb-2" action="{{ route('add-to-favourites') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="productId" value="{{ $product_detail->id }}">
-                                <button type="submit" class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition-colors duration-300 mr-2">
+                                <button type="submit"
+                                    class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition-colors duration-300 mr-2">
                                     Add Favourite
                                 </button>
                             </form>
+                            <form action="{{ route('add-to-favourites') }}" method="POST"
+                                class="flex items-center justify-normal mb-4 w-full">
+                                @csrf
+                                <!-- Input Quantity dan Increment/Decrement Buttons -->
+                                <div class="flex items-center me-2">
+                                    <label for="quantity-input" class="sr-only">Choose quantity:</label>
+                                    <div class="relative flex items-center max-w-[8rem]">
+                                        <!-- Decrement Button -->
+                                        <button type="button" id="decrement-button"
+                                            data-input-counter-decrement="quantity-input"
+                                            class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" d="M1 1h16" />
+                                            </svg>
+                                        </button>
+
+                                        <!-- Quantity Input -->
+                                        <input type="text" id="quantity-input" name="qty" data-input-counter
+                                            data-input-counter-min="1"
+                                            class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            value="1" min="1" required />
+
+                                        <!-- Increment Button -->
+                                        <button type="button" id="increment-button"
+                                            data-input-counter-increment="quantity-input"
+                                            class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                            <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Button Beli Sekarang -->
+                                <div>
+                                    <input type="hidden" name="productId" value="{{ $product_detail->id }}">
+                                    <button type="submit"
+                                        class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition-colors duration-300">
+                                        Beli Sekarang
+                                    </button>
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -166,13 +213,14 @@
                         <div class="space-y-6">
                             <div class="flex">
                                 <div class="flex-shrink-0 mr-4">
-                                    <img class="w-10 h-10 rounded-full" src="{{ asset('storage/' . $data->user_info->photo) }}"
-                                        alt="Avatar">
+                                    <img class="w-10 h-10 rounded-full"
+                                        src="{{ asset('storage/' . $data->user_info->photo) }}" alt="Avatar">
                                 </div>
                                 <div>
 
                                     <div class="flex flex-col lg:flex-row items-start lg:items-center">
-                                        <h3 class="font-bold dark:text-white me-3">{{ $data->user_info['first_name'] }} {{ $data->user_info['last_name'] }}</h3>
+                                        <h3 class="font-bold dark:text-white me-3">{{ $data->user_info['first_name'] }}
+                                            {{ $data->user_info['last_name'] }}</h3>
 
                                         @php
                                             $rating = $data->rating;
@@ -373,22 +421,32 @@
                     @csrf
                     <label for="chat" class="sr-only">Your message</label>
                     <div class="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
-                        <button type="button" data-modal-target="star-modal" data-modal-toggle="star-modal" class="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        <button type="button" data-modal-target="star-modal" data-modal-toggle="star-modal"
+                            class="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                            <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="currentColor"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                             </svg>
                             <span class="sr-only">Add Star</span>
                         </button>
-                        <div id="star-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div id="star-modal" tabindex="-1" aria-hidden="true"
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                             <div class="relative p-4 w-full max-w-xl max-h-full">
                                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                                    <div
+                                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                                             Rating
                                         </h3>
-                                        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="star-modal">
-                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                        <button type="button"
+                                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                            data-modal-hide="star-modal">
+                                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                fill="none" viewBox="0 0 14 14">
+                                                <path stroke="currentColor" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="2"
+                                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                             </svg>
                                             <span class="sr-only">cancel</span>
                                         </button>
@@ -396,27 +454,42 @@
                                     <div class="p-4 md:p-5 space-y-4">
                                         <div class="flex flex-row-reverse justify-end items-center">
                                             @for ($i = 5; $i >= 1; $i--)
-                                                <input id="hs-ratings-readonly-{{ $i }}" type="radio" class="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0" name="rating" value="{{ $i }}">
-                                                <label for="hs-ratings-readonly-{{ $i }}" class="peer-checked:text-yellow-400 text-gray-300 pointer-events-none dark:peer-checked:text-yellow-600 dark:text-neutral-600">
-                                                    <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"></path>
+                                                <input id="hs-ratings-readonly-{{ $i }}" type="radio"
+                                                    class="peer -ms-5 size-5 bg-transparent border-0 text-transparent cursor-pointer appearance-none checked:bg-none focus:bg-none focus:ring-0 focus:ring-offset-0"
+                                                    name="rating" value="{{ $i }}">
+                                                <label for="hs-ratings-readonly-{{ $i }}"
+                                                    class="peer-checked:text-yellow-400 text-gray-300 pointer-events-none dark:peer-checked:text-yellow-600 dark:text-neutral-600">
+                                                    <svg class="flex-shrink-0 size-5" xmlns="http://www.w3.org/2000/svg"
+                                                        width="16" height="16" fill="currentColor"
+                                                        viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z">
+                                                        </path>
                                                     </svg>
                                                 </label>
                                             @endfor
                                         </div>
-                                        
+
                                     </div>
-                                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
-                                        <button data-modal-hide="star-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
-                                        <button data-modal-hide="star-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
+                                    <div
+                                        class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                                        <button data-modal-hide="star-modal" type="button"
+                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                                        <button data-modal-hide="star-modal" type="button"
+                                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Cancel</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <textarea id="chat" name="body" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
-                        <button type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
-                            <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
-                                <path d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
+                        <textarea id="chat" name="body" rows="1"
+                            class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Your message..."></textarea>
+                        <button type="submit"
+                            class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+                            <svg class="w-5 h-5 rotate-90 rtl:-rotate-90" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                <path
+                                    d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
                             </svg>
                             <span class="sr-only">Send message</span>
                         </button>
@@ -426,5 +499,7 @@
             </div>
         </div>
     </section>
+
+
 
 @endsection

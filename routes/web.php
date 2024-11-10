@@ -23,6 +23,8 @@ use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
+require __DIR__ . '/checkout.php';
+
 
 
 // Route untuk membersihkan cache
