@@ -2,14 +2,15 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Admin;
-use App\Models\Merchant;
-use App\Models\User;
-use App\Models\Product;
-use App\Models\Favorite;
-use App\Models\Comment;
 use App\Models\Chat;
+use App\Models\User;
+use App\Models\Admin;
+use App\Models\Comment;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Favorite;
+use App\Models\Merchant;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,6 +23,7 @@ class DatabaseSeeder extends Seeder
     {
         // Create 25 admin users
         Admin::factory(5)->create();
+        Category::factory()->count(10)->create();
 
         // Create 25 merchants and users, each with related products, favorites, comments, and chats
         for ($i = 1; $i <= 25; $i++) {

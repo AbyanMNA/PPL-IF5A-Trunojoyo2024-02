@@ -3,7 +3,7 @@
     :class="{ 'bg-white dark:bg-gray-700 shadow-lg': scroll, 'bg-transparent': !scroll }">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 sticky top-0">
         <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white flex "><img class="size-12 w-40" src="/assets/img/logos/logohome.png" alt=""></span>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white flex "><img class="size-12 w-40" src="/assets/img/logos/logoo.png" alt=""></span>
         </a>
      
         @php
@@ -16,33 +16,33 @@
                 class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-700 md:dark:bg-transparent dark:border-gray-700">
                 <li>
                     <a
-                        href="{{ route('home') }}"class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:py-2.5 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
+                        href="{{ route('home') }}"class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
                 </li>
                 <li>
                     <a href="{{ route('post-product') }}"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:py-2.5 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Product
+                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Product
                         post</a>
                 </li>
 
                 <li>
                     <a href="{{ route('merch-list') }}"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:py-2.5 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Merchant</a>
+                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Merchant</a>
                 </li>
                 <li>
                     @if ($user)
                         <a href="{{ route('global') }}"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:py-2.5 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Global chat</a>
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Global chat</a>
                         
                     @elseif ($merchant)
                         <a href="{{ route('merchant.global') }}"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:py-2.5 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Global
+                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Global
                         chat</a>
                     @endif
                    
                 </li>
                 <li>
                     <a href="{{ route('contact') }}"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:py-2.5 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
                 </li>
                 @if(!$user && !$merchant)
                         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 lg:hidden block" aria-labelledby="dropdownHoverButton">
@@ -120,8 +120,9 @@
            
             @if(!$user && !$merchant)
                 <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
-                    class="hidden  text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    type="button">Get Started </button>
+                    class="hidden text-white bg-[#2196F3] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-[#2196F3] font-medium rounded-lg text-sm px-5 py-2.5 text-center md:inline-flex items-center dark:bg-[#2196F3] dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    type="button">Get Started</button>
+            
                 <!-- Dropdown menu -->
                 <div id="dropdownHover"
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">

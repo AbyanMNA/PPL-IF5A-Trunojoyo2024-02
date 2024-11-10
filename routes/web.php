@@ -25,15 +25,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-
-
-
-
-
-
-
-
 // Route untuk membersihkan cache
 // Route::get('cache-clear', function () {
 //     Artisan::call('optimize:clear');
