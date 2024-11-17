@@ -107,7 +107,7 @@
                         <p class="text-black font-bold mb-4 dark:text-white">Harga: <span
                                 class="font-normal">{{ number_format($product_detail->price, 0, ',', '.') }}</span></p>
                         <p class="text-black font-bold mb-4 dark:text-white">Category: <span
-                                class="font-normal">{{ $product_detail->category }}</span></p>
+                                class="font-normal">{{ $product_detail->category['name'] }}</span></p>
                         <p class="text-black font-bold mb-4 dark:text-white">Deskripsi: <span
                                 class="font-normal dark:text-white line-clamp-3 hover:line-clamp-none">{{ $product_detail->description }}</span>
                         </p>

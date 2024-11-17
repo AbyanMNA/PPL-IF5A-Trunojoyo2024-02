@@ -49,12 +49,6 @@
                     {{ $message }}
                 </div>
             @enderror
-            @error('category')
-                <div class="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-800 dark:bg-gray-800 dark:text-red-400"
-                    role="alert">
-                    {{ $message }}
-                </div>
-            @enderror
             @error('price')
                 <div class="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-800 dark:bg-gray-800 dark:text-red-400"
                     role="alert">
@@ -110,21 +104,19 @@
                         <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                             for="message">Kategori</label>
                         <div class="flex">
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-radio" name="category" type="radio" value="makanan"
-                                    @if ((old('category') ?? $product->category) === 'makanan') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-radio">Makanan</label>
-                            </div>
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="minuman"
-                                    @if ((old('category') ?? $product->category) === 'minuman') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Minuman</label>
+                            <div class="mb-4 flex items-center">
+                                <select name="category_id" class="leading-none dark:text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-100 dark:bg-gray-800 rounded" required>
+                                  <option value="">Pilih kategori</option>
+                                  <?php $counted = 0; $category_product = [1=>'Electronics',2=>'Fashion',3=>'Book',4=>"Beauty & Health",5=>"Sports & Outdoors",6=>"Toys & Hobbies",7=>'Automotive',8=>'Books',9=>'Groceries',10=>'Office Supplies'];
+                                  foreach ($category_product as $kachina_select_categoryID=>$kachina_select_category) {
+                                    $counted += 1;
+                                    if ((old('category') ?? $product->category['id']) === $counted) {
+                                      echo "<option value=\"{$kachina_select_categoryID}\" selected>{$kachina_select_category}</option>";
+                                    } else {
+                                      echo "<option value=\"{$kachina_select_categoryID}\">{$kachina_select_category}</option>";
+                                    }
+                                  } ?>
+                                </select>
                             </div>
                         </div>
                     </div>

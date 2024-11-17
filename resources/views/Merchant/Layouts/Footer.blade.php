@@ -4,11 +4,11 @@
         <div class="md:flex md:justify-between">
             <div class="mb-6 md:mb-0">
                 <a href="{{ route('home') }}" class="flex items-center">
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Jajan UTM</span>
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Goobuy</span>
                 </a>
             </div>
             <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-                <div>
+                <!--<div>
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
@@ -29,7 +29,7 @@
                             <a href="{{ route('soon') }}" class="hover:underline">Discord</a>
                         </li>
                     </ul>
-                </div>
+                </div>-->
                 <div>
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
@@ -45,7 +45,7 @@
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div class="sm:flex sm:items-center sm:justify-between">
-            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="{{ route('soon') }}" class="hover:underline">JajanUtm™</a>. All Rights Reserved.
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="{{ route('soon') }}" class="hover:underline">Goobuy</a>. Code under MIT License.
             </span>
             <div class="flex mt-4 sm:justify-center sm:mt-0">
                 <a href="{{ route('soon') }}" class="text-gray-500 hover:text-gray-900 dark:hover:text-white">

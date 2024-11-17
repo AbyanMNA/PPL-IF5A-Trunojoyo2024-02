@@ -18,17 +18,17 @@
 
                 <div class="mb-4">
                     <label class="flex flex-col md:flex-row font-medium mb-1 ml-2 md:ml-16">Nama Produk
-                        <input type="text" name="name" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-5 dark:text-black" placeholder="Nama Produk" required>
+                        <input type="text" name="name" class="leading-none dark:text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-100 dark:bg-gray-800 rounded" placeholder="Isikan Nama Produk" required>
                     </label>
                 </div>
 
                 <div class="mb-4">
                     <label class="flex flex-col md:flex-row font-medium mb-1 ml-2 md:ml-24">Kategori
-                        <select name="category" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-6 dark:text-black" required>
+                        <select name="category_id" class="leading-none dark:text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-100 dark:bg-gray-800 rounded" required>
                             <option value="">Pilih kategori</option>
-                            <?php $category_product = ['Electronics','Fashion','Book',"Beauty & Health","Sports & Outdoors","Toys & Hobbies",'Automotive','Books','Groceries','Office Supplies'];
-                            foreach ($category_product as $kachina_select_category) {
-                            echo "<option value=\"{$kachina_select_category}\">{$kachina_select_category}</option>";
+                            <?php $category_product = [1=>'Electronics',2=>'Fashion',3=>'Book',4=>"Beauty & Health",5=>"Sports & Outdoors",6=>"Toys & Hobbies",7=>'Automotive',8=>'Books',9=>'Groceries',10=>'Office Supplies'];
+                            foreach ($category_product as $kachina_select_categoryID=>$kachina_select_category) {
+                            echo "<option value=\"{$kachina_select_categoryID}\">{$kachina_select_category}</option>";
                             } ?>
                         </select>
                     </label>
@@ -36,13 +36,13 @@
 
                 <div class="mb-4">
                     <label class="flex flex-col md:flex-row font-medium mb-1 ml-2 md:ml-24">Harga
-                        <input type="number" name="price" class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 ml-0 md:ml-10 dark:text-black" placeholder="Harga" required>
+                        <input type="number" name="price" class="leading-none dark:text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-100 dark:bg-gray-800 rounded" placeholder="Harga" required>
                     </label>
                 </div>
 
                 <div class="flex flex-col md:flex-row items-start space-x-2 md:space-x-4 mb-4">
                     <label for="product-description" class="text-sm font-medium  ml-2 md:ml-14">Deskripsi Produk</label>
-                    <textarea id="product-description" name="description" rows="5" class="border border-gray-300 rounded-lg pb-6 ml-0 md:ml-7 w-[15rem] md:w-[40rem] focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-black"></textarea>
+                    <textarea id="product-description" name="description" rows="5" class="w-11/12 leading-none dark:text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-100 dark:bg-gray-800 rounded"></textarea>
                 </div>
 
                 <div class="mb-4">

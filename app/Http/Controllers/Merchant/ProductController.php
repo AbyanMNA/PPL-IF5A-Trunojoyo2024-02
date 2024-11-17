@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use DB;
 
 class ProductController extends Controller
 {   
@@ -44,10 +45,7 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'category' => [
-                'required',
-                Rule::in(['makanan', 'minuman']),
-            ],
+            'category_id' => 'required|integer',
             'price' => 'required|integer',
             'rating' => 'nullable|numeric|min:0|max:5',
             'status' => [
@@ -66,7 +64,7 @@ class ProductController extends Controller
     
         $validated['merchant_id'] = $merchantId;
     
-        Product::create($validated);
+        DB::table('products')->insert($validated);
         
         Alert::success('Produk berhasil ditambahkan');
         return redirect()->route('merchant.products.index')->with('success', 'Produk berhasil ditambahkan.');
@@ -94,20 +92,15 @@ class ProductController extends Controller
     }
 
     $validated = $request->validate([
-        'name' => ['required', 'max:255'],
-        'description' => ['required'],
-        'category' => [
-            'required',
-            Rule::in(['makanan', 'minuman']),
-        ],
-        'price' => ['required', 'numeric'],
-        // 'rating' => ['required', 'numeric', 'min:0', 'max:5'],
-        'status' => [
-            'required',
-            Rule::in(['tersedia', 'habis']),
-        ],
-        'photo' => ['nullable', 'file', 'mimes:jpg,png', 'max:2048'],
-        'promotion_photos.*' => ['nullable', 'file', 'mimes:jpg,png', 'max:2048'],
+        'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'category_id' => 'required|integer',
+            'price' => 'required|integer',
+            'status' => [
+                'required',
+                Rule::in(['tersedia', 'habis']),
+            ],
+            'photo' => 'nullable|file|mimes:jpg,png|max:2048',
     ]);
 
     if ($request->hasFile('photo')) {
