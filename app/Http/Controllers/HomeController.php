@@ -25,7 +25,6 @@ class HomeController extends Controller
         $featured = Product::with('merchant')->where('status', 'tersedia')->orderBy('id', 'DESC')->limit(6)->get();
         $new_merchant = Merchant::limit(4)->orderBy('id', 'DESC')->get();
         $categories = Category::all();
-
         return view('Homepage')
             ->with('featured', $featured)
             ->with('new_merchant', $new_merchant)

@@ -28,4 +28,7 @@ use App\Http\Controllers\CheckoutController;
 
 Route::middleware('auth:user')->group(function () {
     Route::post('/checkout', [CheckoutController::class, 'newCheckout'])->name('checkout');
+    Route::get('/checkout', [CheckoutController::class, 'newCheckout'])->name('checkout');
+    Route::post('/voucher/{slug}', [CheckoutController::class, 'applyVoucher'])->name('voucher-apply');
+    Route::post('/checkout/bayar', [CheckoutController::class, 'bayar'])->name('checkout-bayar');
 });

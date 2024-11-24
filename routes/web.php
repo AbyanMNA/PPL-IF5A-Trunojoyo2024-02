@@ -23,7 +23,7 @@ use App\Http\Controllers\User\ProfileController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-require __DIR__ . '/checkout.php';
+require __DIR__ . '/checkout_group.php';
 
 
 
