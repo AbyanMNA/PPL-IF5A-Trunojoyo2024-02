@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ChatController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\KomentarController;
+use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\Admin\MerchantController;
 use App\Http\Controllers\Admin\PostinganController;
 use App\Http\Controllers\Admin\UserController;
@@ -46,6 +47,13 @@ Route::post('/add-to-favourites', [HomeController::class, 'addToFavourites'])->n
 Route::post('/comments', [CommentController::class, 'store'])->middleware('auth:user')->name('comments.store');
 Route::get('/merchant-list', [HomeController::class, 'merchantGrids'])->name('merch-list');
 Route::get('/merchant/detail/{slug}', [HomeController::class, 'merchantDetail'])->name('merch-info');
+
+// Route untuk alamat
+Route::get('provinces', [AlamatController::class, 'provinces'])->name('provinces');
+Route::get('cities', [AlamatController::class, 'cities'])->name('cities');
+Route::get('districts', [AlamatController::class, 'districts'])->name('districts');
+Route::get('villages', [AlamatController::class, 'villages'])->name('villages');
+
 
 // Route untuk user login
 Route::middleware('guest:user,merchant')->group(function () {
@@ -122,6 +130,8 @@ Route::prefix('merchant')->middleware('auth:merchant')->name('merchant.')->group
         Route::put('/{product}', [ProductController::class, 'update'])->name('update');
         Route::delete('/{product}', [ProductController::class, 'destroy'])->name('destroy');
     });
+
+
 
     Route::prefix('coment')
         ->name('coment.')

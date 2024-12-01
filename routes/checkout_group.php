@@ -24,11 +24,15 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use App\Http\Controllers\CheckoutController;
-
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\AlamatController;
 
 Route::middleware('auth:user')->group(function () {
     Route::post('/checkout', [CheckoutController::class, 'newCheckout'])->name('checkout');
     Route::get('/checkout', [CheckoutController::class, 'newCheckout'])->name('checkout');
     Route::post('/voucher/{slug}', [CheckoutController::class, 'applyVoucher'])->name('voucher-apply');
-    Route::post('/checkout/bayar', [CheckoutController::class, 'bayar'])->name('checkout-bayar');
+    Route::post('/checkout/bayar', [PaymentController::class, 'newPayment'])->name('checkout-bayar');
+    Route::get('/checkout/pay', [PaymentController::class, 'paymentPage'])->name('payment-page');
+    Route::post('/checkout/pay/success', [PaymentController::class, 'paySuccess'])->name('payment-finish');
+    Route::post('ubah-alamat', [AlamatController::class, 'ubahAlamat'])->name('ubah-alamat');
 });

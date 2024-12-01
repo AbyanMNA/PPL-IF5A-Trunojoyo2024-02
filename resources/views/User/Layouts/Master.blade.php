@@ -4,12 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="assets/img/logos/mainlogoo.png" type="image/png"/>
+    <link rel="icon" href="assets/img/logos/mainlogoo.png" type="image/png" />
     <title>@yield('title')</title>
     <script type="module" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -18,9 +18,12 @@
 <body class="bg-gray-200 dark:bg-gray-500">
     <div class="bg-gray-200 dark:bg-gray-500">
         @include('sweetalert::alert')
-        @include('User.Layouts.Header')
+        @section('header')
+            @include('User.Layouts.Header')
+        @show
         @yield('content')
-        <button type="button" x-data="{}" @click="window.scrollTo({ top: 0, behavior: 'smooth' })"  class="!fixed bottom-5 z-50 end-5 hidden rounded-full bg-[#2196F3] p-3 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-[#2196F3] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
+        <button type="button" x-data="{}" @click="window.scrollTo({ top: 0, behavior: 'smooth' })"
+            class="!fixed bottom-5 z-50 end-5 hidden rounded-full bg-[#2196F3] p-3 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-[#2196F3] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg"
             id="scroll-to-top">
             <span class="[&>svg]:w-4">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3"
@@ -29,7 +32,9 @@
                 </svg>
             </span>
         </button>
-        @include('User.Layouts.Footer')
+        @section('footer')
+            @include('User.Layouts.Footer')
+        @show
     </div>
 
     @yield('scripts')
@@ -114,19 +119,19 @@
         }
 
         function updateUrlParameters(event) {
-                event.preventDefault();
-                const form = event.target;
-                const formData = new FormData(form);
-                const params = new URLSearchParams(formData);
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const params = new URLSearchParams(formData);
 
-                for (let pair of params.entries()) {
-                    if (!pair[1]) {
-                        params.delete(pair[0]);
-                    }
+            for (let pair of params.entries()) {
+                if (!pair[1]) {
+                    params.delete(pair[0]);
                 }
-
-                window.location.search = params.toString();
             }
+
+            window.location.search = params.toString();
+        }
     </script>
 
     <script src="https://unpkg.com/@popperjs/core@2"></script>

@@ -1,7 +1,6 @@
 @extends('User.Layouts.Master')
 @section('title', 'Checkout')
 @section('content')
-    {{ $qty }}
     <section class="w-full pt-20 ">
         <!-- breadcrumb -->
         <div class="container py-4 flex items-center gap-3 ps-6 lg:ps-20 dark:bg-gray-700">
@@ -104,7 +103,7 @@
                                                             -center justify-end">
                                                             <span
                                                                 class="text-sm me-3 font font-semibold text-gray-700 dark:text-gray-200">
-                                                                1x</span> <span
+                                                                {{ $product->qty }}x</span> <span
                                                                 class="text-sm font-semibold text-gray-700 dark:text-gray-200">Rp.
                                                                 {{ number_format($product->price) }}</span>
 
@@ -112,6 +111,8 @@
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="product[]" value="{{ $product->id }}"
+                                                    form="checkout-form">
+                                                <input type="hidden" name="qty[]" value="{{ $product->qty }}"
                                                     form="checkout-form">
                                             @endforeach
                                         </div>
@@ -129,34 +130,53 @@
                                 <button data-modal-target="alamat-modal" data-modal-toggle="alamat-modal"
                                     class="text-sm font-semibold text-blue-600 dark:text-blue-400 hover:underline">Ubah</button>
                             </div>
+                            <div style="background-image: repeating-linear-gradient(45deg,#6fa6d6,#6fa6d6 33px,transparent 0,transparent 41px,#f18d9b 0,#f18d9b 74px,transparent 0,transparent 82px)"
+                                class="h-1">
+
+                            </div>
+
                             <div class="px-6 py-4">
-                                <div class="flex items
-                                    -center gap-4">
-                                    <div class="flex flex-col">
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Nama</span>
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Alamat</span>
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Kota</span>
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Provinsi</span>
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Kode
-                                            Pos</span>
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">No.
-                                            Telp</span>
+                                @if (empty($alamat) || count($alamat) == 0)
+                                    <div class="flex items-center justify-center">
+                                        <h5 class="text-sm font-semibold text-gray-700 dark:text-gray-200">Alamat belum
+                                            diatur</h5>
+                                        <input type="hidden" name="alamat_bool" value="0">
                                     </div>
-                                    <div class="flex flex-col">
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">:
-                                            Tes</span>
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">:
-                                            Tes</span>
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">:
-                                            Tes</span>
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">:
-                                            Tes</span>
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">:
-                                            Tes</span>
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">:
-                                            Tes</span>
+                                @else
+                                    <div class="flex items
+                                -center gap-4">
+                                        <div class="flex flex-col pe-4 border-e-2 border-dashed border-blue-700">
+                                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Alamat
+                                                Lengkap</span>
+                                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Desa</span>
+                                            <span
+                                                class="text-sm font-semibold text-gray-700 dark:text-gray-200">Kecamatan</span>
+                                            <span
+                                                class="text-sm font-semibold text-gray-700 dark:text-gray-200">Kota</span>
+                                            <span
+                                                class="text-sm font-semibold text-gray-700 dark:text-gray-200">Provinsi</span>
+                                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Kode
+                                                Pos</span>
+                                            {{-- @dd($alamat) --}}
+                                        </div>
+                                        <div class="flex flex-col ms-2">
+                                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                                {{ $alamat[0]['alamat_lengkap'] }}</span>
+                                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                                {{ $alamat[0]['kelurahan'] }}</span>
+                                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                                {{ $alamat[0]['kecamatan'] }}</span>
+                                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                                {{ $alamat[0]['kabupaten'] }}</span>
+                                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                                {{ $alamat[0]['provinsi'] }}</span>
+                                            <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">
+                                                {{ $alamat[0]['kode_pos'] }}</span>
+                                        </div>
                                     </div>
-                                </div>
+                                    <input type="hidden" name="alamat_bool" value="1">
+                                @endif
+
                             </div>
                         </div>
                         <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg">
@@ -203,6 +223,7 @@
                                         Toko</span>
                                     <span class="text-sm font-semibold text-gray-700 dark:text-gray-200">Rp.
                                         0
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -240,6 +261,8 @@
                                     Pembayaran</span>
                                 <span id="total-price" class="text-sm font-semibold text-gray-700 dark:text-gray-200">Rp.
                                     {{ number_format($total) }}</span>
+                                <input id="totalPayment" type="hidden" name="total" value="{{ $total }}"
+                                    form="checkout-form">
                             </div>
                             <form action="{{ route('checkout-bayar') }}" method="post" id="checkout-form">
                                 @csrf
@@ -254,7 +277,6 @@
 
         </div>
 
-        <div class="min-h-screen"></div>
         <!-- Tambahkan script Alpine.js -->
 
 
@@ -273,7 +295,7 @@
                 <!-- Modal header -->
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                        Create New Product
+                        Alamat Pengiriman
                     </h3>
                     <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -287,72 +309,71 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5">
+                <form class="p-4 md:p-5" id="alamat-form">
+                    @csrf
                     <div class="grid gap-2 mb-4 grid-cols-2">
                         <div class="col-span-2">
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                            <input type="text" name="name" id="name"
+                            <label for="alamat_lengkap"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat Lengkap</label>
+                            <input type="text" name="alamat_lengkap" id="alamat_lengkap"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="" required="">
+                                placeholder="Masukan Alamat Lengkap" required
+                                value="@if (!empty($alamat) && count($alamat) > 0) {{ $alamat[0]['alamat_lengkap'] }} @endif">
                         </div>
                         <div class="col-span-2">
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Telp</label>
-                            <input type="text" name="name" id="name"
+                            <label for="kelurahan"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kelurahan</label>
+                            <input type="text" name="kelurahan" id="kelurahan"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="" required="">
-                        </div>
-                        <div class="col-span-2">
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-                            <input type="text" name="name" id="name"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="" required="">
+                                placeholder="Kelurahan"
+                                value="@if (!empty($alamat) && count($alamat) > 0) {{ $alamat[0]['kelurahan'] }} @endif">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="name"
+                            <label for="kecamatan"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kecamatan</label>
-                            <input type="text" name="name" id="name"
+                            <input type="text" name="kecamatan" id="kecamatan"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="" required="">
+                                placeholder="Kecamatan"
+                                value="@if (!empty($alamat) && count($alamat) > 0) {{ $alamat[0]['kecamatan'] }} @endif">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="name"
+                            <label for="kabupaten"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kabupaten</label>
-                            <input type="text" name="name" id="name"
+                            <input type="text" name="kabupaten" id="kabupaten"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="" required="">
+                                placeholder="Kabupaten"
+                                value="@if (!empty($alamat) && count($alamat) > 0) {{ $alamat[0]['kabupaten'] }} @endif">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="name"
+                            <label for="provinsi"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provinsi</label>
-                            <input type="text" name="name" id="name"
+                            <input type="text" name="provinsi" id="provinsi"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="" required="">
+                                placeholder="Provinsi" required
+                                value="@if (!empty($alamat) && count($alamat) > 0) {{ $alamat[0]['provinsi'] }} @endif">
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="name"
+                            <label for="kode_post"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Post</label>
-                            <input type="text" name="name" id="name"
+                            <input type="text" name="kode_post" id="kode_post"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                placeholder="" required="">
+                                placeholder="Masukkan kode post" required
+                                value="@if (!empty($alamat) && count($alamat) > 0) {{ $alamat[0]['kode_pos'] }} @endif">
                         </div>
                     </div>
-                    <button type="submit"
-                        class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        Ubah Alamat
-                    </button>
                 </form>
+                <!-- Modal footer -->
+                <div class="flex items-center justify-end p-4 md:p-5 border-t rounded-b dark:border-gray-600">
+                    <button type="button"
+                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                        data-modal-toggle="alamat-modal">Batal</button>
+                    <button type="button" id="save-alamat"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ms-2">Simpan</button>
+                </div>
             </div>
         </div>
     </div>
+
 
 
 
@@ -360,6 +381,39 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        $(document).ready(function() {
+            $('#save-alamat').click(function() {
+                $.ajax({
+                    url: "{{ route('ubah-alamat') }}",
+                    type: "POST",
+                    data: $('#alamat-form').serialize(),
+                    success: function(response) {
+                        if (response.success === true) {
+                            Swal.fire({
+                                title: 'Alamat berhasil diubah',
+                                icon: 'success',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            console.log(response);
+                            Swal.fire({
+                                title: 'Gagal mengubah alamat',
+                                icon: 'error',
+                            });
+                        }
+                    },
+                    error: function(response) {
+                        Swal.fire({
+                            title: 'Terjadi kesalahan',
+                            icon: 'error',
+                        });
+                    }
+                });
+            });
+        });
         $(document).ready(function() {
             let initialPrice = $("#price")
                 .text()
@@ -384,10 +438,12 @@
                 let price = parseInt(initialPrice);
                 let discountPrice = price - (price * discount) / 100;
                 let discountValue = formatToIDR(price - discountPrice);
-                let totalPrice = formatToIDR(discountPrice + shippingCost);
-                console.log(price, discountPrice, totalPrice);
-                $("#total-price").text(totalPrice);
+                let totalPrice = (discountPrice + shippingCost).toFixed(0);
+                let totalPriceFormated = formatToIDR(discountPrice + shippingCost);
+                console.log(price, discountPrice, totalPriceFormated);
+                $("#total-price").text(totalPriceFormated);
                 $("#discount-value").text(discountValue);
+                $('#totalPayment').val(totalPrice);
             }
 
             // Apply Voucher
@@ -440,8 +496,11 @@
 
             // Checkout
             $("#checkout-button").click(function() {
+                let isValid = true;
+
                 $('input[name="merchant[]"]').each(function() {
                     if ($(this).attr("form") !== "checkout-form") {
+                        isValid = false;
                         Swal.fire({
                             title: "Checkout tidak valid",
                             icon: "error",
@@ -452,8 +511,10 @@
                         });
                     }
                 });
+
                 $('input[name="product[]"]').each(function() {
                     if ($(this).attr("form") !== "checkout-form") {
+                        isValid = false;
                         Swal.fire({
                             title: "Checkout tidak valid",
                             icon: "error",
@@ -464,8 +525,23 @@
                         });
                     }
                 });
+                $('input[name="qty[]"]').each(function() {
+                    if ($(this).attr("form") !== "checkout-form") {
+                        isValid = false;
+                        Swal.fire({
+                            title: "Checkout tidak valid",
+                            icon: "error",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }
+                });
+
                 $('input[name="voucher"]').each(function() {
                     if ($(this).attr("form") !== "checkout-form") {
+                        isValid = false;
                         Swal.fire({
                             title: "Checkout tidak valid",
                             icon: "error",
@@ -476,7 +552,24 @@
                         });
                     }
                 });
-                $("#checkout-form").submit();
+
+                $('input[name="alamat_bool"]').each(function() {
+                    if ($(this).attr("value") === "0") {
+                        isValid = false;
+                        Swal.fire({
+                            title: "Alamat tidak boleh kosong",
+                            icon: "error",
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+                    }
+                });
+
+                if (isValid) {
+                    $("#checkout-form").submit();
+                }
             });
         });
     </script>

@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class VouchersDetail extends Model
+class DetailTransaksi extends Model
 {
     use HasFactory;
-
+    protected $table = 'detail_transaksi';
     protected $fillable = [
-        'voucher_id',
-        'users_id',
-        'used_at',
+        'transaksi_id',
+        'product_id',
+        'qty',
+        'price',
+        'total'
     ];
 }

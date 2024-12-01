@@ -6,6 +6,7 @@ use App\Models\Merchant;
 use App\Models\Product;
 use App\Models\Vouchers;
 use App\Models\VouchersDetail;
+use App\Models\Alamat;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
@@ -20,10 +21,15 @@ class CheckoutController extends Controller
             return redirect()->route('home');
         }
 
+        $product_id = $request->productId;
         $qty = $request->qty;
-        $product_id = $request->product_id;
-        // $product_id = $request->product_id;
-        $product_id = [1, 2, 3, 26];
+        $productsWithQty = [];
+        foreach ($product_id as $key => $id) {
+            $productsWithQty[] = [
+                'id' => $id,
+                'qty' => $qty[$key],
+            ];
+        }
         $product = Product::whereIn('id', $product_id)->get();
         $merchant = Merchant::whereIn('id', $product->pluck('merchant_id'))->get();
         foreach ($product as $key => $value) {
@@ -33,10 +39,7 @@ class CheckoutController extends Controller
         }
         $userId = Auth::id();
 
-        $total = 0;
-        foreach ($product as $key => $value) {
-            $total += $value->price;
-        }
+
 
         // product to object
         $group_product = $product->groupBy('merchant_id');
@@ -48,16 +51,45 @@ class CheckoutController extends Controller
                 'products' => $products,
             ];
         }
+        foreach ($groupedOrders as $groupedOrder) {
+            foreach ($groupedOrder['products'] as &$product) {
+                foreach ($productsWithQty as $productWithQty) {
+                    if ($product->id == $productWithQty['id']) {
+                        $product->qty = $productWithQty['qty'];
+                    }
+                }
+            }
+        }
+
+        // total
+        $total = 0;
+        foreach ($groupedOrders as $groupedOrder) {
+            foreach ($groupedOrder['products'] as $product) {
+                $total += $product->price * $product->qty;
+            }
+        }
+
+        // Alamat
+        $alamat = Alamat::where('user_id', $userId)->get();
+        // dd($alamat);
+
+
+
         $data = [
             'qty' => $qty,
             'total' => $total,
             'userId' => $userId,
             'pesanan' => $groupedOrders,
+            'alamat' => $alamat,
         ];
+
         // dd($data);
         // dd($product->toArray() + $merchant->toArray());
+        // dd($data);
         return view('Pages.checkout')->with($data);
     }
+
+
     public function applyVoucher(Request $request, $slug)
     {
         $voucher = Vouchers::where('code', $slug)->first();
@@ -87,11 +119,5 @@ class CheckoutController extends Controller
             'discount' => $voucher->discount_amount,
             'code' => $voucher->code,
         ]);
-    }
-
-    public function bayar(Request $request)
-    {
-        $data = $request->all();
-        dd($data);
     }
 }

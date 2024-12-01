@@ -89,8 +89,9 @@ class HomeController extends Controller
 
         // Category filter logic
         if ($request->filled('category')) {
-            $categories = $request->input('category');
-            $products->whereIn('category', $categories);
+            $categoryNames = $request->input('category');
+            $categoryIds = Category::whereIn('name', $categoryNames)->pluck('id')->toArray();
+            $products->whereIn('category_id', $categoryIds);
         }
         // availible filter l
         if ($request->filled('availability')) {
@@ -111,7 +112,7 @@ class HomeController extends Controller
         $show = $request->input('show', 6);
         $products = $products->with('merchant')->orderBy('id', 'desc')->paginate($show);
 
-        return view('Pages.Postingan')->with('products', $products);
+        return view('Pages.Postingan')->with('products', $products)->with('categories', Category::all());
     }
 
     public function merchantGrids(Request $request)

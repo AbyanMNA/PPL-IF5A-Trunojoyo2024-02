@@ -170,7 +170,7 @@
                                         </button>
 
                                         <!-- Quantity Input -->
-                                        <input type="text" id="quantity-input" name="qty" data-input-counter
+                                        <input type="text" id="quantity-input" name="qty[]" data-input-counter
                                             data-input-counter-min="1"
                                             class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             value="1" min="1" required />
@@ -190,7 +190,7 @@
 
                                 <!-- Button Beli Sekarang -->
                                 <div>
-                                    <input type="hidden" name="productId" value="{{ $product_detail->id }}">
+                                    <input type="hidden" name="productId[]" value="{{ $product_detail->id }}">
                                     <button type="submit"
                                         class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition-colors duration-300">
                                         Beli Sekarang
