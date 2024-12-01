@@ -33,9 +33,9 @@ class CheckoutController extends Controller
         $product = Product::whereIn('id', $product_id)->get();
         $merchant = Merchant::whereIn('id', $product->pluck('merchant_id'))->get();
         foreach ($product as $key => $value) {
-            // if ($value->status != 'tersedia') {
-            //     return back()->with('error', 'Produk tidak tersedia');
-            // }
+            if ($value->status != 'tersedia') {
+                return back()->with('error', 'Produk tidak tersedia');
+            }
         }
         $userId = Auth::id();
 
