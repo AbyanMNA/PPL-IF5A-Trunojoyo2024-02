@@ -91,7 +91,7 @@ class HomeController extends Controller
         // Category filter logic
         if ($request->filled('category')) {
             $categories = $request->input('category');
-            $products->whereIn('category', $categories);
+            $products->whereIn('category_id', $categories);
         }
         // availible filter l
         if ($request->filled('availability')) {

@@ -55,10 +55,8 @@
                                                 <div class="flex items-center space-x-2 rtl:space-x-reverse">
                                                     @if ($message->sender_type === 'App\Models\User')
                                                     <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $message->sender->first_name }}</span>
-
                                                     @elseif ($message->sender_type === 'App\Models\Merchant')
                                                     <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ $message->sender->owner }}</span>
-
                                                     @endif
                                                     <span class="text-sm font-normal text-gray-500 dark:text-gray-400">{{ $message->created_at->format('H:i') }}</span>
                                                 </div>
@@ -72,7 +70,6 @@
                             </div>
                         </div>
                     </div>
-
                     <form action="
                         @if ($user)
                             {{ route('chat.store') }}

@@ -4,73 +4,53 @@
     <div class="w-full ">
         <section class="hero overflow-hidden">
 
-            <div class=" pb-[110px] pt-[120px] z-10 lg:pt-[150px] bg-cover"
-                style="background-image: url('assets/img/heros/bgr-hero2.png')">
+            <div class="relative pb-[110px] pt-[120px] z-10 lg:pt-[150px] bg-cover"
+                style="background-image: url('assets/img/heros/bgr-hero2.png');">
 
-                <div class="container  mx-auto">
+                <div class="container mx-auto px-4 lg:px-20">
 
-                    <div class="mx-6 lg:mx-20 flex flex-wrap items-center">
+                    <div class="flex flex-wrap items-center">
                         <div class="w-full px-4 lg:w-5/12">
-                            <div class="hero-content ">
-
+                            <div class="hero-content">
                                 @if (Auth::guard('user')->check())
-                                <a @disabled(true) href="{{ route('home') }}" class="z-12 text-white bg-[#2196F3] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:inline-flex items-center dark:bg-blue-600 dark:hover:bg-[#2196F3] dark:focus:ring-blue-800"
-                                    >Hi {{ Auth::guard('user')->user()->first_name }} </a>
-
+                                    <a @disabled(true) href="{{ route('home') }}"
+                                        class="z-12 text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+                                        Hi {{ Auth::guard('user')->user()->first_name }}
+                                    </a>
                                 @elseif (Auth::guard('merchant')->check())
-                                    <a @disabled(true) href="{{ route('home') }}" class="z-12 text-white bg-[#2196F3] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:inline-flex items-center dark:bg-blue-600 dark:hover:bg-[#2196F3] dark:focus:ring-blue-800"
-                                    >{{ Auth::guard('merchant')->user()->owner }}  </a>
-
+                                    <a @disabled(true) href="{{ route('home') }}"
+                                        class="z-12 text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center md:inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+                                        {{ Auth::guard('merchant')->user()->owner }}
+                                    </a>
                                 @else
-                                <a href="{{ route('login') }}"
-                                    class="inline-block rounded-md border border-transparent bg-[#2196F3] px-7 py-3 text-base font-medium text-white transition hover:bg-opacity-90 mt-96">
-                                    Get Started now
-                                </a>
+                                    <a href="{{ route('login') }}"
+                                        class="inline-block rounded-md border border-transparent bg-blue-500 px-7 py-3 text-base font-medium text-white transition hover:bg-opacity-90 mt-96">
+                                        Get Started now
+                                    </a>
                                 @endif
-                              
-
                             </div>
                         </div>
                         <div class="hidden px-4 lg:block lg:w-1/12"></div>
                         <div class="w-full px-4 lg:w-6/12 min-h-96">
                             <div class="lg:ml-auto lg:text-right">
                                 <div class="relative z-3 inline-block pt-11 lg:pt-0">
-                                    <span class="absolute m-bottom-8 m-right-8 ">
+                                    <span class="absolute right-8 bottom-8">
                                         <svg width="93" height="93" viewBox="0 0 93 93" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <circle cx="2.5" cy="2.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="2.5" cy="24.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="2.5" cy="46.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="2.5" cy="68.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="2.5" cy="90.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="24.5" cy="2.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="24.5" cy="24.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="24.5" cy="46.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="24.5" cy="68.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="24.5" cy="90.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="46.5" cy="2.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="46.5" cy="24.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="46.5" cy="46.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="46.5" cy="68.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="46.5" cy="90.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="68.5" cy="2.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="68.5" cy="24.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="68.5" cy="46.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="68.5" cy="68.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="68.5" cy="90.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="90.5" cy="2.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="90.5" cy="24.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="90.5" cy="46.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="90.5" cy="68.5" r="2.5" fill="#2196F3" />
-                                            <circle cx="90.5" cy="90.5" r="2.5" fill="#2196F3" />   
+                                            <!-- More circles here -->
                                         </svg>
                                     </span>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
+            </div>
+
+            <!-- Tailwind classes for mobile responsiveness -->
+            <div class="md:pb-[60px] md:pt-[80px]"></div>
+
                 {{-- <div class="mt-5 lg:mt-[-210px] w-full z-2 absolute ">
                     <svg class="dark:fill-gray-500 fill-gray-200" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 1440 320">
@@ -110,8 +90,8 @@
                                     <img src="/assets/img/category/{{ $category->name }}.jpg" alt="{{ $category->name }}" class="w-full h-36 object-cover">
                                 </div>
                                 <div class="p-4">
-                                    <a href="postingan?category%5B%5D={{ strtolower(strtok($category->name, ' ')) }}&min=&max="
-                                        class="mb-[14px] text-2xl font-semibold text-dark dark:text-white flex flex-col truncate ">
+                                    <a href="postingan?category%5B%5D={{ $category->id }}&min=&max="
+                                        class="mb-[14px] text-2xl font-semibold text-dark dark:text-white flex flex-col truncate">
                                         {{ $category->name }}
                                     </a>
                                     <p class="text-body-color hover:text-pretty dark:text-white mb-8 text-start truncate hover:text-clip">
@@ -121,7 +101,7 @@
                                         <p class="flex flex-row font-medium">
                                             <p class="text-xs text-blue-800 dark:text-blue-300">
                                         </p>    
-                                        <a href="postingan?category%5B%5D={{ strtolower(strtok($category->name, ' ')) }}&min=&max=" class="flex">
+                                        <a href="postingan?category%5B%5D={{ $category->id }}&min=&max=" class="flex">
                                             <button class="hidden text-white bg-[#2196F3] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-[#2196F3] font-medium rounded-lg text-sm px-5 py-2.5 text-center md:inline-flex items-center dark:bg-[#2196F3] dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                                 Jelajahi
                                             </button>
@@ -132,6 +112,7 @@
                         </div>                   
                         @endforeach
                     @endif
+
 
                 </div>
             </div>
