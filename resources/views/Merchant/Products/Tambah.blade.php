@@ -28,19 +28,19 @@
 
                     <div class="mb-4">
                         <label class="flex flex-col md:flex-row font-medium mb-1 ml-2 md:ml-24">Kategori
-                            <select name="category"
+                            <select name="category_id"
                                 class="w-[15rem] md:w-[40rem] border-zinc-300 border rounded-lg p-2 md:ml-6" required>
                                 <option value="">Pilih kategori</option>
-                                <option value="electronics">Electronics</option>
-                                <option value="fashion">Fashion</option>
-                                <option value="book">Book</option>
-                                <option value="beauty_health">Beauty & Health</option>
-                                <option value="sports_outdoors">Sports & Outdoors</option>
-                                <option value="toys_hobbies">Toys & Hobbies</option>
-                                <option value="automotive">Automotive</option>
-                                <option value="books">Books</option>
-                                <option value="groceries">Groceries</option>
-                                <option value="office_supplies">Office Supplies</option>
+                                <option value="1">Electronics</option>
+                                <option value="2">Fashion</option>
+                                <option value="3">Book</option>
+                                <option value="4">Beauty & Health</option>
+                                <option value="5">Sports & Outdoors</option>
+                                <option value="6">Toys & Hobbies</option>
+                                <option value="7">Automotive</option>
+                                <option value="8">Books</option>
+                                <option value="9">Groceries</option>
+                                <option value="10">Office Supplies</option>
                             </select>
                         </label>
                     </div>

@@ -7,6 +7,7 @@ use App\Models\Merchant;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -40,23 +41,33 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $merchantId = Auth::guard('merchant')->id();
-
+        // dd($request->all());
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'category' => [
+            'category_id' => [
                 'required',
                 Rule::in([
-                    'Electronics',
-                    'Fashion',
-                    'Book',
-                    'Beauty & Health',
-                    'Sports & Outdoors',
-                    'Toys & Hobbies',
-                    'Automotive',
-                    'Books',
-                    'Groceries',
-                    'Office Supplies'
+                    // 'Electronics',
+                    // 'Fashion',
+                    // 'Book',
+                    // 'Beauty & Health',
+                    // 'Sports & Outdoors',
+                    // 'Toys & Hobbies',
+                    // 'Automotive',
+                    // 'Books',
+                    // 'Groceries',
+                    // 'Office Supplies'
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
                 ]),
             ],
             'price' => 'required|integer',
@@ -92,20 +103,12 @@ class ProductController extends Controller
             return redirect()->route('merchant.products.index')->with('error', 'Unauthorized access');
         }
 
+        $category = Category::all();
+
+
         return view('Merchant.Products.Edit', [
             'product' => $product,
-            'categories' => [
-                'Electronics',
-                'Fashion',
-                'Book',
-                'Beauty & Health',
-                'Sports & Outdoors',
-                'Toys & Hobbies',
-                'Automotive',
-                'Books',
-                'Groceries',
-                'Office Supplies'
-            ],
+            'category' => $category,
         ]);
     }
 

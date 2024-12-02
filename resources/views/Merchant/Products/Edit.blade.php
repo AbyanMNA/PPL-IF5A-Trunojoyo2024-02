@@ -108,96 +108,18 @@
                         <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                             for="message">Kategori</label>
                         <div class="flex flex-wrap">
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-radio" name="category" type="radio" value="elektronik"
-                                    @if ((old('category') ?? $product->category) === 'elektronik') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-radio">Elektronik</label>
-                            </div>
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="kesehatan"
-                                    @if ((old('category') ?? $product->category) === 'kesehatan') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Kesehatan</label>
-                            </div>
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="komputer"
-                                    @if ((old('category') ?? $product->category) === 'komputer') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Komputer & Aksesoris</label>
-                            </div>
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="makanan"
-                                    @if ((old('category') ?? $product->category) === 'makanan') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Makanan & Minuman</label>
-                            </div>
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="pakaianpria"
-                                    @if ((old('category') ?? $product->category) === 'pakaianpria') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Pakaian Pria</label>
-                            </div>
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="pakaianwanita"
-                                    @if ((old('category') ?? $product->category) === 'pakaianwanita') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Pakaian Wanita</label>
-                            </div>
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="perawatan"
-                                    @if ((old('category') ?? $product->category) === 'perawatan') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Perawatan & Kecantikan</label>
-                            </div>
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="perlengrumah"
-                                    @if ((old('category') ?? $product->category) === 'perlengrumah') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Perlengkapan Rumah</label>
-                            </div>
+                            {{-- @dd($product) --}}
+                            @foreach ($category as $item)
+                                <div class="me-4 flex items-center">
+                                    <input
+                                        class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                                        id="inline-radio" name="category" type="radio" value="{{ $item->id }}"
+                                        @if ((old('category_id') ?? $product->category_id) == $item->id) checked @endif>
+                                    <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                        for="inline-radio">{{ $item->name }}</label>
+                                </div>
+                            @endforeach
 
-                            <!-- Elemen berikut akan berpindah ke baris kedua ketika ruang di baris pertama penuh -->
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="olahraga"
-                                    @if ((old('category') ?? $product->category) === 'olahraga') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Olahraga & Outdoor</label>
-                            </div>
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="otomotif"
-                                    @if ((old('category') ?? $product->category) === 'otomotif') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Otomotif</label>
-                            </div>
-                            <div class="me-4 flex items-center">
-                                <input
-                                    class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                    id="inline-2-radio" name="category" type="radio" value="tas"
-                                    @if ((old('category') ?? $product->category) === 'tas') checked @endif>
-                                <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                    for="inline-2-radio">Tas</label>
-                            </div>
                         </div>
                     </div>
                     <div class="mb-6">
