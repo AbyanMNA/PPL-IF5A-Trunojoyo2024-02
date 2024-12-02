@@ -113,7 +113,7 @@
                                 <div class="me-4 flex items-center">
                                     <input
                                         class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-                                        id="inline-radio" name="category" type="radio" value="{{ $item->id }}"
+                                        id="inline-radio" name="category_id" type="radio" value="{{ $item->id }}"
                                         @if ((old('category_id') ?? $product->category_id) == $item->id) checked @endif>
                                     <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                                         for="inline-radio">{{ $item->name }}</label>

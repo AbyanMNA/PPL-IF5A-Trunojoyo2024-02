@@ -122,19 +122,29 @@ class ProductController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'max:255'],
             'description' => ['required'],
-            'category' => [
+            'category_id' => [
                 'required',
                 Rule::in([
-                    'Electronics',
-                    'Fashion',
-                    'Book',
-                    'Beauty & Health',
-                    'Sports & Outdoors',
-                    'Toys & Hobbies',
-                    'Automotive',
-                    'Books',
-                    'Groceries',
-                    'Office Supplies'
+                    // 'Electronics',
+                    // 'Fashion',
+                    // 'Book',
+                    // 'Beauty & Health',
+                    // 'Sports & Outdoors',
+                    // 'Toys & Hobbies',
+                    // 'Automotive',
+                    // 'Books',
+                    // 'Groceries',
+                    // 'Office Supplies'
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10
                 ]),
             ],
             'price' => ['required', 'numeric'],
