@@ -24,6 +24,7 @@ use App\Http\Controllers\Merchant\MerchantIndexController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Merchant\CommentController as MerchantCommentController;
 use App\Http\Controllers\Merchant\ProfileController as MerchantProfileController;
+use App\Models\ContactUs;
 
 require __DIR__ . '/checkout_group.php';
 
@@ -196,6 +197,11 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
         Route::get('/', [KomentarController::class, 'index'])->name('index');
         Route::delete('/{comment}', [KomentarController::class, 'destroy'])->name('destroy');
     });
+
+    Route::prefix('contact')->name('contact.')->group(function () {
+        Route::get('/', [ContactUsController::class, 'index_admin'])->name('index');
+        Route::delete('/{contact}', [ContactUsController::class, 'destroy'])->name('destroy');
+    });    
 });
 
 

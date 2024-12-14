@@ -23,4 +23,18 @@ class ContactUsController extends Controller
     
         return redirect()->back()->with('success', 'Data berhasil dikirim');
     }
+
+    public function index_admin(){
+        $messages = ContactUs::paginate(10);
+
+        return view('admin.contact.index', [
+            'messages' => $messages,
+        ]);
+    }
+
+    public function destroy(ContactUs $contact)
+    {
+        $contact->delete();
+        return redirect()->route('admin.contact.index');
+    }
 }

@@ -16,7 +16,7 @@ class MerchantController extends Controller
         $merchants = Merchant::when(request('search') ?? false, function ($query, $search) {
             return $query->where('name', 'LIKE', "%$search%");
         })
-            ->paginate(2)
+            ->paginate(5)
             ->withQueryString();
 
         return view('Admin.Merchants.Index', [
