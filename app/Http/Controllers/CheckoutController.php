@@ -21,8 +21,11 @@ class CheckoutController extends Controller
             return redirect()->route('home');
         }
 
+
         $product_id = $request->productId;
         $qty = $request->qty;
+        $product_id = explode(',', $product_id[0]); // Hasil: ["25", "26"]
+        $qty = explode(',', $qty[0]); // Hasil: ["3", "2"]
         $productsWithQty = [];
         foreach ($product_id as $key => $id) {
             $productsWithQty[] = [

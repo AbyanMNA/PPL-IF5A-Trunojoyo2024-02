@@ -12,6 +12,15 @@
             $merchant = Auth::guard('merchant')->user();
         @endphp
 
+        @php
+            use App\Models\Cart;
+
+            $cart = Cart::where('user_id', $user ? $user->id : null)
+                ->get()
+                ->count();
+        @endphp
+
+
         <div id="navbar-default" class="hidden w-full lg:block lg:w-auto">
             <ul
                 class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-700 md:dark:bg-transparent dark:border-gray-700">
@@ -136,10 +145,11 @@
                     </ul>
                 </div>
             @elseif($user)
-                <button id="theme-toggle-user" type="button"
-                    class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
-                    <!-- Your theme toggle icon here -->
-                </button>
+                <a type="button" href="{{ route('user.cart') }}"
+                    class="rounded-full bg-[#2196F3] p-3 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-[#2196F3] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    {{ $cart }}
+                </a>
                 <!-- Dropdown button for user -->
                 <div>
                     <button type="button"

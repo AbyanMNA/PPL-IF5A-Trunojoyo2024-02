@@ -210,7 +210,7 @@
 
                         </div>
 
-                        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg">
+                        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg mb-4 md:mb-0">
                             <div
                                 class="flex items
                                 -center justify-between px-6 py-4 border-b dark:border-gray-700">

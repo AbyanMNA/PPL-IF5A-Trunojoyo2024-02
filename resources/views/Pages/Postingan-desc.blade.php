@@ -148,10 +148,11 @@
                                 <input type="hidden" name="productId" value="{{ $product_detail->id }}">
                                 <button type="submit"
                                     class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition-colors duration-300 mr-2">
+                                    <i class="fa-solid fa-heart me-1"></i>
                                     Add Favourite
                                 </button>
                             </form>
-                            <form action="{{ route('checkout') }}" method="POST"
+                            <form action="{{ route('checkout') }}" method="POST" id = "form-checkout"
                                 class="flex items-center justify-normal mb-4 w-full">
                                 @csrf
                                 <!-- Input Quantity dan Increment/Decrement Buttons -->
@@ -189,9 +190,22 @@
                                 </div>
 
                                 <!-- Button Beli Sekarang -->
+                                <div class="me-2">
+                                    <input type="hidden" name="product_cart" value="{{ $product_detail->id }}"
+                                        form="form-cart">
+
+                                    <button type="submit" form="form-cart"
+                                        class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded px-5 py-2 transition-colors duration-300 ">
+
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        Masukan Keranjang
+                                    </button>
+                                </div>
                                 <div>
-                                    <input type="hidden" name="productId[]" value="{{ $product_detail->id }}">
-                                    <button type="submit"
+                                    <input type="hidden" name="productId[]" value="{{ $product_detail->id }}"
+                                        form="form-checkout">
+
+                                    <button type="submit" form="form-checkout"
                                         class="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 transition-colors duration-300">
                                         Beli Sekarang
                                     </button>
@@ -201,6 +215,9 @@
                         </div>
                     </div>
                 </div>
+                <form action="{{ route('user.add.to.cart') }}" method="post" id="form-cart">
+                    @csrf
+                </form>
 
 
 
@@ -499,7 +516,22 @@
             </div>
         </div>
     </section>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('#form-cart').on('submit', function(e) {
+                e.preventDefault();
+                var qty = $('#quantity-input').val();
+                $('<input>').attr({
+                    type: 'hidden',
+                    name: 'qty_cart',
+                    value: qty
+                }).appendTo('#form-cart');
+                this.submit();
+            });
+        });
+    </script>
 
 
 @endsection

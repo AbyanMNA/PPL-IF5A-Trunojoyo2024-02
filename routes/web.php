@@ -22,6 +22,7 @@ use App\Http\Controllers\Merchant\ProductController;
 use App\Http\Controllers\RegisterMerchantController;
 use App\Http\Controllers\Merchant\MerchantIndexController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Merchant\CommentController as MerchantCommentController;
 use App\Http\Controllers\Merchant\ProfileController as MerchantProfileController;
 
@@ -111,6 +112,8 @@ Route::prefix('user')->middleware('auth:user')->name('user.')->group(function ()
     Route::post('/profile', [ProfileController::class, 'updateProfile'])->name('update');
     Route::get('/fav', [FavouriteController::class, 'index'])->name('fav');
     Route::post('/fav/delete', [FavouriteController::class, 'removeFromWishlist'])->name('remove.from.wishlist');
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('add.to.cart');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::post('/password-update', [ProfileController::class, 'updatePassword'])->name('password.update');
     Route::post('user/photo/update', [ProfileController::class, 'updatePhoto'])->name('photo.update');
     Route::delete('user/photo/delete', [ProfileController::class, 'deletePhoto'])->name('photo.delete');
