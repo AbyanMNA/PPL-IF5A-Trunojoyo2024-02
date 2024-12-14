@@ -1,28 +1,29 @@
 <?php
 
-use App\Http\Controllers\Admin\ChatController;
-use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\Admin\KomentarController;
-use App\Http\Controllers\AlamatController;
-use App\Http\Controllers\Admin\MerchantController;
-use App\Http\Controllers\Admin\PostinganController;
-use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\FavouriteController;
-use App\Http\Controllers\FormRegisterController;
-use App\Http\Controllers\GlobalChatController;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\AlamatController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\LoginUserController;
-use App\Http\Controllers\Merchant\CommentController as MerchantCommentController;
-use App\Http\Controllers\Merchant\MerchantIndexController;
-use App\Http\Controllers\Merchant\ProductController;
-use App\Http\Controllers\Merchant\ProfileController as MerchantProfileController;
-use App\Http\Controllers\RegisterMerchantController;
+use App\Http\Controllers\Admin\ChatController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\GlobalChatController;
+use App\Http\Controllers\LoginAdminController;
+use App\Http\Controllers\FormRegisterController;
 use App\Http\Controllers\RegisterUserController;
 use App\Http\Controllers\User\ProfileController;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\KomentarController;
+use App\Http\Controllers\Admin\MerchantController;
+use App\Http\Controllers\Admin\PostinganController;
+use App\Http\Controllers\Merchant\ProductController;
+use App\Http\Controllers\RegisterMerchantController;
+use App\Http\Controllers\Merchant\MerchantIndexController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Merchant\CommentController as MerchantCommentController;
+use App\Http\Controllers\Merchant\ProfileController as MerchantProfileController;
 
 require __DIR__ . '/checkout_group.php';
 
@@ -88,11 +89,9 @@ Route::middleware('guest')->group(function () {
     Route::post('/register-user', [RegisterUserController::class, 'register_user'])->name('submit-reg-user');
 });
 
-// Route lainnya
-
-Route::get('/contact', function () {
-    return view('Pages.Contact');
-})->name('contact');
+// Route untuk contact
+Route::get('/contact', [ContactUsController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactUsController::class, 'store'])->name('contact.store');
 
 // Rute untuk User
 // Rute untuk User dan Merchant

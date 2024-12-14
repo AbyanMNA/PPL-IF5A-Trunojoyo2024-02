@@ -48,16 +48,6 @@ class ProductController extends Controller
             'category_id' => [
                 'required',
                 Rule::in([
-                    // 'Electronics',
-                    // 'Fashion',
-                    // 'Book',
-                    // 'Beauty & Health',
-                    // 'Sports & Outdoors',
-                    // 'Toys & Hobbies',
-                    // 'Automotive',
-                    // 'Books',
-                    // 'Groceries',
-                    // 'Office Supplies'
                     1,
                     2,
                     3,
