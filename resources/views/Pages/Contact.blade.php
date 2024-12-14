@@ -94,27 +94,28 @@
                         </div>
                     </div>
                 </div>
+                <!-- ... -->
                 <div class="w-full px-4 lg:w-1/2 xl:w-5/12">
                     <div class="relative rounded-lg bg-gray-200 dark:bg-gray-600 shadow-lg lg:p-12 p-4 ">
-                        <form>
+                        <form action="{{ route('contact.store') }}" method="POST">
+                            @csrf
                             <div class="mb-6">
-                                <input type="text" placeholder="Your Name"
+                                <input type="text" name="YourName" placeholder="Your Name"
                                     class="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6" />
                             </div>
                             <div class="mb-6">
-                                <input type="email" placeholder="Your Email"
+                                <input type="email" name="YourEmail" placeholder="Your Email"
                                     class="w-full rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6" />
                             </div>
-                   
                             <div class="mb-6">
-                                <textarea rows="6" placeholder="Your Message"
+                                <textarea name="YourMessage" rows="6" placeholder="Your Message"
                                     class="w-full resize-none rounded border border-stroke px-[14px] py-3 text-base text-body-color outline-none focus:border-primary dark:border-dark-3 dark:bg-dark dark:text-dark-6"></textarea>
                             </div>
                             <div>
-                                <a  href="{{ route('soon') }}"
-                                    class="w-full rounded border border-gray-500 bg-gray-500 p-3 text-white t hover:bg-opacity-90">
+                                <button type="submit"
+                                    class="w-full rounded border border-gray-500 bg-gray-500 p-3 text-white hover:bg-opacity-90">
                                     Send Message
-                                </a>
+                                </button>
                             </div>
                         </form>
                         <div>
@@ -126,10 +127,11 @@
                                         fill="#3056D3" />
                                 </svg>
                             </span>
-                     
                         </div>
                     </div>
                 </div>
+
+                <!-- ... -->
             </div>
         </div>
     </section>
