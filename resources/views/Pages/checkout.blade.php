@@ -92,7 +92,7 @@
                                                             target="_blank"
                                                             class="flex items-center aspect-square w-20 h-20 shrink-0">
                                                             <img class="h-auto w-full max-h-full"
-                                                                src="https://placehold.co/600x400" />
+                                                                src="{{ $product->photo ?? 'https://placehold.co/600x400' }}" />
                                                         </a>
                                                         <a href="{{ route('post-product-detail', $product->id) }}"
                                                             class="hover:underline">{{ $product->name }}</a>

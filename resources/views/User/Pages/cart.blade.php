@@ -76,7 +76,7 @@
                                         <div class="flex items-center w-5/12 gap-4 h-20">
                                             <a href="{{ route('post-product-detail', $ps['product_id']) }}" target="_blank"
                                                 class="flex items-center aspect-square w-20 h-20 shrink-0">
-                                                <img class="h-auto w-full max-h-full" src="https://placehold.co/600x400" />
+                                                <img class="h-auto w-full max-h-full" src="{{ $ps['photo'] }}" />
                                             </a>
                                             <a href="{{ route('post-product-detail', $ps['product_id']) }}"
                                                 class="hover:underline text-gray-700 dark:text-gray-200">{{ $ps['name'] }}</a>
@@ -182,8 +182,7 @@
                                             <a href="{{ route('post-product-detail', $ph['product_id']) }}"
                                                 target="_blank"
                                                 class="flex items-center aspect-square w-20 h-20 shrink-0">
-                                                <img class="h-auto w-full max-h-full"
-                                                    src="https://placehold.co/600x400" />
+                                                <img class="h-auto w-full max-h-full" src="{{ $ph['photo'] }}" />
                                             </a>
                                             <a href="{{ route('post-product-detail', $ph['product_id']) }}"
                                                 class="hover:underline text-gray-700 dark:text-gray-200">{{ $ph['name'] }}</a>
@@ -256,6 +255,7 @@
                 calculateTotal();
 
                 $('#checkout-button').click(function() {
+                    let isValid = true;
                     let product_id = [];
                     let product_qty = [];
                     $('input[name="checkout[]"]:checked').each(function() {
@@ -264,6 +264,22 @@
                         product_id.push(id);
                         product_qty.push(qty);
                     });
+
+                    if (product_id.length == 0) {
+                        isValid = false;
+                        Swal.fire({
+                            title: "Tidak ada produk yang dipilih",
+                            icon: "error",
+
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                location.reload();
+                            }
+                        });
+
+                    }
+
+
                     $('<input>').attr({
                         type: 'hidden',
                         name: 'productId[]',
@@ -274,7 +290,10 @@
                         name: 'qty[]',
                         value: product_qty
                     }).appendTo('#checkout-form');
-                    $('#checkout-form').submit();
+
+                    if (isValid) {
+                        $("#checkout-form").submit();
+                    }
                 });
 
 
