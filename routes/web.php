@@ -1,10 +1,13 @@
 <?php
 
+use App\Models\ContactUs;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AlamatController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\LoginUserController;
@@ -22,10 +25,8 @@ use App\Http\Controllers\Merchant\ProductController;
 use App\Http\Controllers\RegisterMerchantController;
 use App\Http\Controllers\Merchant\MerchantIndexController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\Merchant\CommentController as MerchantCommentController;
 use App\Http\Controllers\Merchant\ProfileController as MerchantProfileController;
-use App\Models\ContactUs;
 
 require __DIR__ . '/checkout_group.php';
 
@@ -56,6 +57,11 @@ Route::get('provinces', [AlamatController::class, 'provinces'])->name('provinces
 Route::get('cities', [AlamatController::class, 'cities'])->name('cities');
 Route::get('districts', [AlamatController::class, 'districts'])->name('districts');
 Route::get('villages', [AlamatController::class, 'villages'])->name('villages');
+
+Route::get('/layanan', function () {
+    return view('User.Pages.Layanan.layananpelangganindex');
+})->name('layanan');
+Route::get('/kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
 
 
 // Route untuk user login
