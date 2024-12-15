@@ -33,7 +33,7 @@ class MerchantFactory extends Factory
             'password' => bcrypt('password'),
             'description' =>  fake()->paragraph(),
             'address' => fake()->address(),
-            'type' => fake()->randomElement(['Toko biasa', 'Toko besar', 'Stan mall', 'Toko cabang', 'Stan pasar']),
+            'type' => fake()->randomElement(['Cafe', 'Lapak Mahasiswa', 'Pedagang Keliling', 'UMKM', 'Warung Makan']),
             'owner' => fake()->name(),
             'logo' => 'logo/logo-' . static::$i . '.jpg',
             'cover' => 'cover/cover-' . static::$i . '.jpg',

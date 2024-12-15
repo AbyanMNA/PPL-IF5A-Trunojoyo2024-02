@@ -22,8 +22,8 @@ class CommentController extends Controller
 
         // Periksa apakah pengguna sudah mengomentari produk ini
         $existingComment = Comment::where('user_id', $userId)
-                                ->where('product_id', $productId)
-                                ->first();
+            ->where('product_id', $productId)
+            ->first();
 
         if ($existingComment) {
             Alert::info('Comment', 'Anda sudah pernah memberikan komentar pada produk ini.');

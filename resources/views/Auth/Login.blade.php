@@ -3,7 +3,7 @@
 @section('navbar-title', 'Homepage')
 
 @section('content-auth')
-@include('sweetalert::alert')
+    @include('sweetalert::alert')
     <main class="main-content mt-0">
         <section>
             <div class="page-header min-vh-75">
@@ -20,41 +20,51 @@
                                         @csrf
                                         <label>Email</label>
                                         <div class="mb-3">
-                                            <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}" aria-label="Email" aria-describedby="email-addon">
+                                            <input type="email" class="form-control" name="email" placeholder="Email"
+                                                value="{{ old('email') }}" aria-label="Email"
+                                                aria-describedby="email-addon">
                                         </div>
                                         <label>Password</label>
                                         <div class="mb-3">
-                                            <input type="password" class="form-control" name="password" placeholder="Password" value="{{ old('password') }}" aria-label="Password" aria-describedby="password-addon">
+                                            <input type="password" class="form-control" name="password"
+                                                placeholder="Password" value="{{ old('password') }}" aria-label="Password"
+                                                aria-describedby="password-addon">
                                         </div>
                                         {{-- <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
                                             <label class="form-check-label" for="rememberMe">Remember me</label>
                                         </div> --}}
-                                        <h3 class="mb-2 text-lg font-medium text-gray-900 dark:text-white">Which role are you?</h3>
+                                        <h3 class="mb-2 text-lg font-medium text-gray-900 dark:text-white">Which role are
+                                            you?</h3>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="user_type" id="user" value="user">
+                                            <input class="form-check-input" type="radio" name="user_type" id="user"
+                                                value="user">
                                             <label class="form-check-label" for="user">User</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="user_type" id="merchant" value="merchant">
+                                            <input class="form-check-input" type="radio" name="user_type" id="merchant"
+                                                value="merchant">
                                             <label class="form-check-label" for="merchant">Merchant</label>
-                                        </div>                                        
+                                        </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign in</button>
+                                            <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign
+                                                in</button>
                                         </div>
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                     <p class="mb-4 text-sm mx-auto">
                                         Don't have an account?
-                                        <a href="{{ route('register') }}" class="text-info text-gradient font-weight-bold">Sign up</a>
+                                        <a href="{{ route('register') }}"
+                                            class="text-info text-gradient font-weight-bold">Sign up</a>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n3">
-                                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6" style="background-image:url('../assets/img/sate.jpg')"></div>
+                                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
+                                    style="background-image:url('../assets/img/heros/login-hero.jpg')"></div>
                             </div>
                         </div>
                     </div>
@@ -62,7 +72,7 @@
             </div>
         </section>
     </main>
-    
+
 @endsection
 @if ($errors->any())
     <script>

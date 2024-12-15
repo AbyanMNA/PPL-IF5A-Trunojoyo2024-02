@@ -16,7 +16,7 @@
                         <div class="flex items-center">
                             <i class="mx-1 w-3 text-gray-400 rtl:rotate-180">|</i>
                             <a class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white md:ms-2"
-                                href="{{ route('merchant.products.index')}}">Daftar
+                                href="{{ route('merchant.products.index') }}">Daftar
                                 Produk</a>
                         </div>
                     </li>
@@ -49,6 +49,12 @@
                     {{ $message }}
                 </div>
             @enderror
+            @error('category')
+                <div class="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-800 dark:bg-gray-800 dark:text-red-400"
+                    role="alert">
+                    {{ $message }}
+                </div>
+            @enderror
             @error('price')
                 <div class="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-800 dark:bg-gray-800 dark:text-red-400"
                     role="alert">
@@ -74,13 +80,26 @@
                 </div>
             @enderror
             <div class="block rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
-                <dl>
-                    <dd class="mb-6 font-light text-gray-500 dark:text-gray-400">
-                        <img class="size-30 rounded-lg"
-                            src="{{ asset('storage/' . $product->photo) }}"
-                            alt="Helene avatar">
-                    </dd>
-                </dl>
+                <div class="flex flex-row gap-2 flex-grow-0">
+                    <dl class="w-1/3">
+                        <dd class="mb-6 w-fit font-light text-gray-500 dark:text-gray-400">
+                            <img class="size-30 rounded-lg" src="{{ asset('storage/' . $product->photo) }}"
+                                alt="Product Image 1">
+                        </dd>
+                    </dl>
+                    <dl class="w-1/3">
+                        <dd class="mb-6 w-fit font-light text-gray-500 dark:text-gray-400">
+                            <img class="size-30 rounded-lg" src="{{ asset('storage/' . $product->photo2) }}"
+                                alt="Product Image 2">
+                        </dd>
+                    </dl>
+                    <dl class="w-1/3">
+                        <dd class="mb-6 w-fit font-light text-gray-500 dark:text-gray-400">
+                            <img class="size-30 rounded-lg" src="{{ asset('storage/' . $product->photo3) }}"
+                                alt="Product Image 3">
+                        </dd>
+                    </dl>
+                </div>
                 <form action="{{ route('merchant.products.update', ['product' => $product->id]) }}" method="POST"
                     enctype="multipart/form-data">
                     @method('put')
@@ -103,21 +122,19 @@
                     <div class="mb-6">
                         <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
                             for="message">Kategori</label>
-                        <div class="flex">
-                            <div class="mb-4 flex items-center">
-                                <select name="category_id" class="leading-none dark:text-gray-50 p-3 focus:outline-none focus:border-blue-700 mt-4 border-0 bg-gray-100 dark:bg-gray-800 rounded" required>
-                                  <option value="">Pilih kategori</option>
-                                  <?php $counted = 0; $category_product = [1=>'Electronics',2=>'Fashion',3=>'Book',4=>"Beauty & Health",5=>"Sports & Outdoors",6=>"Toys & Hobbies",7=>'Automotive',8=>'Books',9=>'Groceries',10=>'Office Supplies'];
-                                  foreach ($category_product as $kachina_select_categoryID=>$kachina_select_category) {
-                                    $counted += 1;
-                                    if ((old('category') ?? $product->category['id']) === $counted) {
-                                      echo "<option value=\"{$kachina_select_categoryID}\" selected>{$kachina_select_category}</option>";
-                                    } else {
-                                      echo "<option value=\"{$kachina_select_categoryID}\">{$kachina_select_category}</option>";
-                                    }
-                                  } ?>
-                                </select>
-                            </div>
+                        <div class="flex flex-wrap">
+                            {{-- @dd($product) --}}
+                            @foreach ($category as $item)
+                                <div class="me-4 flex items-center">
+                                    <input
+                                        class="h-4 w-4 border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
+                                        id="inline-radio" name="category_id" type="radio" value="{{ $item->id }}"
+                                        @if ((old('category_id') ?? $product->category_id) == $item->id) checked @endif>
+                                    <label class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                        for="inline-radio">{{ $item->name }}</label>
+                                </div>
+                            @endforeach
+
                         </div>
                     </div>
                     <div class="mb-6">
@@ -160,10 +177,28 @@
                     </div>
                     <div class="mb-6">
                         <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                            for="file_input">Photo</label>
+                            for="file_input">Photo1</label>
                         <input
                             class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
-                            id="file_input" name="photo" type="file" aria-describedby="file_input_help">
+                            id="file_input" name="photo1" type="file" aria-describedby="file_input_help">
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG or JPG
+                            (MAX. 2MB).</p>
+                    </div>
+                    <div class="mb-6">
+                        <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                            for="file_input">Photo2</label>
+                        <input
+                            class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
+                            id="file_input" name="photo2" type="file" aria-describedby="file_input_help">
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG or JPG
+                            (MAX. 2MB).</p>
+                    </div>
+                    <div class="mb-6">
+                        <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                            for="file_input">Photo3</label>
+                        <input
+                            class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
+                            id="file_input" name="photo3" type="file" aria-describedby="file_input_help">
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG or JPG
                             (MAX. 2MB).</p>
                     </div>

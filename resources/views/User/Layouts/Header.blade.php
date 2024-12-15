@@ -3,15 +3,25 @@
     :class="{ 'bg-white dark:bg-gray-700 shadow-lg': scroll, 'bg-transparent': !scroll }">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 sticky top-0">
         <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white flex "><img class="size-12 w-40" src="/assets/img/logos/logoo.png" alt=""></span>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white flex "><img
+                    class="size-12 w-40" src="/assets/img/logos/logoo.png" alt=""></span>
         </a>
-     
+
         @php
-        $user = Auth::guard('user')->user();
-        $merchant = Auth::guard('merchant')->user();
+            $user = Auth::guard('user')->user();
+            $merchant = Auth::guard('merchant')->user();
         @endphp
 
-        <div id="navbar-default" class="hidden w-full md:block md:w-auto">
+        @php
+            use App\Models\Cart;
+
+            $cart = Cart::where('user_id', $user ? $user->id : null)
+                ->get()
+                ->count();
+        @endphp
+
+
+        <div id="navbar-default" class="hidden w-full lg:block lg:w-auto">
             <ul
                 class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent dark:bg-gray-700 md:dark:bg-transparent dark:border-gray-700">
                 <li>
@@ -29,75 +39,66 @@
                         class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Merchant</a>
                 </li>
                 <li>
-                    @if ($user)
-                        <a href="{{ route('global') }}"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Global chat</a>
-                        
-                    @elseif ($merchant)
-                        <a href="{{ route('merchant.global') }}"
-                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Global
-                        chat</a>
-                    @endif
-                   
+                    <a href="{{ route('layanan', ['kategori' => 'nama-kategori']) }}"
+                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white">
+                        Layanan
+                     </a>
                 </li>
                 <li>
                     <a href="{{ route('contact') }}"
                         class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
                 </li>
-                @if(!$user && !$merchant)
-                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 lg:hidden block" aria-labelledby="dropdownHoverButton">
-                            <li>
-                                <a href="{{ route('login') }}"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Login</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('register') }}"
-                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Register</a>
-                            </li>
-                        </ul>
-                    
-                @elseif($user)  
-                        <ul class="py-1 lg:hidden block" role="none">
-                            <li>
-                                <a href="{{ route('user.index') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Profile</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('user.fav') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Favorite</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('logout') }}"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Sign out</a>
-                            </li>
-                        </ul>
-                   
+                @if (!$user && !$merchant)
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 lg:hidden block"
+                        aria-labelledby="dropdownHoverButton">
+                        <li>
+                            <a href="{{ route('login') }}"
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Login</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('register') }}"
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Register</a>
+                        </li>
+                    </ul>
+                @elseif($user)
+                    <ul class="py-1 lg:hidden block" role="none">
+                        <li>
+                            <a href="{{ route('user.index') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">Profile</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('user.fav') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">Favorite</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">Sign out</a>
+                        </li>
+                    </ul>
+                @elseif ($merchant)
+                    <!-- Dropdown button for merchant -->
 
-                    @elseif ($merchant)
-           
-                        <!-- Dropdown button for merchant -->
-                      
-                            <!-- Merchant menu items -->
-                            <ul class="py-1 lg:hidden block"  role="none">
-                                <li>
-                                <a  href="{{ route('merchant.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                        role="menuitem">Dashboard</a>
-                                </li>
-                            
-                                <li>
-                                    <a href="{{ route('logout') }}"
-                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                        role="menuitem">Sign out</a>
-                                </li>
-                            </ul>
-                        
-                    @endif
-                    
+                    <!-- Merchant menu items -->
+                    <ul class="py-1 lg:hidden block" role="none">
+                        <li>
+                            <a href="{{ route('merchant.index') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">Dashboard</a>
+                        </li>
 
-                
+                        <li>
+                            <a href="{{ route('logout') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                                role="menuitem">Sign out</a>
+                        </li>
+                    </ul>
+                @endif
+
+
+
 
             </ul>
 
@@ -117,12 +118,12 @@
                 </svg>
             </button>
 
-           
-            @if(!$user && !$merchant)
+
+            @if (!$user && !$merchant)
                 <button id="dropdownHoverButton" data-dropdown-toggle="dropdownHover" data-dropdown-trigger="hover"
                     class="hidden text-white bg-[#2196F3] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-[#2196F3] font-medium rounded-lg text-sm px-5 py-2.5 text-center md:inline-flex items-center dark:bg-[#2196F3] dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                     type="button">Get Started</button>
-            
+
                 <!-- Dropdown menu -->
                 <div id="dropdownHover"
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
@@ -137,11 +138,12 @@
                         </li>
                     </ul>
                 </div>
-            @elseif($user)  
-                <button id="theme-toggle-user" type="button"
-                    class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
-                    <!-- Your theme toggle icon here -->
-                </button>
+            @elseif($user)
+                <a type="button" href="{{ route('user.cart') }}"
+                    class="rounded-full bg-[#2196F3] p-3 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-700 hover:shadow-lg focus:bg-[#2196F3] focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    {{ $cart }}
+                </a>
                 <!-- Dropdown button for user -->
                 <div>
                     <button type="button"
@@ -149,7 +151,7 @@
                         aria-expanded="false" data-dropdown-toggle="dropdown-user">
                         <span class="sr-only">Open user menu</span>
                         <img class="w-8 h-8 rounded-full"
-                            src="{{ asset('storage/' .   Auth::guard('user')->user()->photo) }}" alt="Profile photo" >
+                            src="{{ asset('storage/' . Auth::guard('user')->user()->photo) }}" alt="Profile photo">
                     </button>
                 </div>
                 <!-- Dropdown menu for user -->
@@ -180,7 +182,6 @@
                         </li>
                     </ul>
                 </div>
-
             @elseif ($merchant)
                 <button id="theme-toggle-merchant" type="button"
                     class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
@@ -193,7 +194,7 @@
                         aria-expanded="false" data-dropdown-toggle="dropdown-merchant">
                         <span class="sr-only">Open user menu</span>
                         <img class="w-8 h-8 rounded-full"
-                            src="{{ asset('storage/' .   Auth::guard('merchant')->user()->logo) }}" alt="user photo">
+                            src="{{ asset('storage/' . Auth::guard('merchant')->user()->logo) }}" alt="user photo">
                     </button>
                 </div>
                 <!-- Dropdown menu for merchant -->
@@ -208,10 +209,11 @@
                     <!-- Merchant menu items -->
                     <ul class="py-1" role="none">
                         <li>
-                        <a  href="{{ route('merchant.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
+                            <a href="{{ route('merchant.index') }}"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
                                 role="menuitem">Dashboard</a>
                         </li>
-                    
+
                         <li>
                             <a href="{{ route('logout') }}"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
@@ -223,9 +225,9 @@
 
         </div>
         <button id="triggerEl" data-collapse-toggle="navbar-default" type="button"
-        class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-dark rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-        aria-controls="navbar-default">
-        <ion-icon class="text-8xl font-bold" onclick="onToggleMenu(this)" name="menu"></ion-icon>
-    </button>
+            class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-dark rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            aria-controls="navbar-default">
+            <ion-icon class="text-8xl font-bold" onclick="onToggleMenu(this)" name="menu"></ion-icon>
+        </button>
     </div>
 </nav>

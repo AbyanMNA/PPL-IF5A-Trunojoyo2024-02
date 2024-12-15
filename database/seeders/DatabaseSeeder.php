@@ -11,6 +11,13 @@ use App\Models\Category;
 use App\Models\Favorite;
 use App\Models\Merchant;
 use Illuminate\Database\Seeder;
+use App\Models\Vouchers;
+use App\Models\VouchersDetail;
+
+use Laravolt\Indonesia\Seeds\CitiesSeeder;
+use Laravolt\Indonesia\Seeds\VillagesSeeder;
+use Laravolt\Indonesia\Seeds\DistrictsSeeder;
+use Laravolt\Indonesia\Seeds\ProvincesSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -21,10 +28,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // create unique voucher
+        // $this->call([
+        //     ProvincesSeeder::class,
+        //     CitiesSeeder::class,
+        //     DistrictsSeeder::class,
+        //     VillagesSeeder::class,
+        // ]);
+
         // Create 25 admin users
         Admin::factory(5)->create();
         Category::factory()->count(10)->create();
-
         // Create 25 merchants and users, each with related products, favorites, comments, and chats
         for ($i = 1; $i <= 25; $i++) {
             // Create a merchant
@@ -32,7 +46,7 @@ class DatabaseSeeder extends Seeder
 
             // Create a user
             $user = User::factory()->create();
-
+            $vouchers = Vouchers::factory()->create();
             // Create a product for the merchant
             Product::factory()->create(['merchant_id' => $merchant->id]);
 
@@ -44,6 +58,9 @@ class DatabaseSeeder extends Seeder
 
             // Create a chat (using the new ChatFactory setup)
             Chat::factory()->create(['sender_id' => $user->id, 'sender_type' => User::class]);
+
+
+            //
         }
     }
 }

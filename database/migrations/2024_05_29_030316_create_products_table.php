@@ -20,6 +20,8 @@ return new class extends Migration
             $table->float('rating')->nullable();
             $table->string('status');
             $table->string('photo')->nullable();
+            $table->string('photo2')->nullable();
+            $table->string('photo3')->nullable();
             $table->foreignId('merchant_id')->constrained();
         });
     }

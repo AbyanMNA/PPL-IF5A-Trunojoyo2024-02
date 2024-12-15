@@ -37,12 +37,14 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \RealRashid\SweetAlert\ToSweetAlert::class,
+            \App\Http\Middleware\MidtransConfig::class,
         ],
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\MidtransConfig::class,
         ],
     ];
 
@@ -67,6 +69,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'merchant' => \App\Http\Middleware\Merchant::class,
         'admin' => \App\Http\Middleware\Admin::class,
-        'checkUserType' => \App\Http\Middleware\CheckUserType::class,   
+        'checkUserType' => \App\Http\Middleware\CheckUserType::class,
     ];
 }
