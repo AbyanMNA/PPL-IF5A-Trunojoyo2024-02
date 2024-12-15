@@ -114,6 +114,9 @@ Route::prefix('user')->middleware('auth:user')->name('user.')->group(function ()
     Route::get('/fav', [FavouriteController::class, 'index'])->name('fav');
     Route::post('/fav/delete', [FavouriteController::class, 'removeFromWishlist'])->name('remove.from.wishlist');
     Route::post('/cart/add', [CartController::class, 'addToCart'])->name('add.to.cart');
+    Route::post('/cart/add', [CartController::class, 'addToCart'])->name('add.to.cart');
+    Route::post('/cart/delete', [CartController::class, 'removeFromCart'])->name('remove.from.cart');
+    Route::post('/cart/update/qty', [CartController::class, 'updateCartQty'])->name('update.cart.qty');
     Route::get('/cart', [CartController::class, 'index'])->name('cart');
     Route::post('/password-update', [ProfileController::class, 'updatePassword'])->name('password.update');
     Route::post('user/photo/update', [ProfileController::class, 'updatePhoto'])->name('photo.update');
@@ -204,7 +207,7 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
     Route::prefix('contact')->name('contact.')->group(function () {
         Route::get('/', [ContactUsController::class, 'index_admin'])->name('index');
         Route::delete('/{contact}', [ContactUsController::class, 'destroy'])->name('destroy');
-    });    
+    });
 });
 
 

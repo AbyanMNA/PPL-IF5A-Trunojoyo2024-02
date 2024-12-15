@@ -1,6 +1,8 @@
 @extends('User.Layouts.Master')
 @section('title', 'Keranjang Belanja')
 @section('content')
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <section class="w-full pt-20 ">
         <!-- breadcrumb -->
         <div class="container py-4 flex items-center gap-3 ps-6 lg:ps-20 dark:bg-gray-700">
@@ -55,10 +57,13 @@
                             </div>
 
                             <div id="pesanan" class="px-6 py-4">
+                                @php
+                                    $i = 1;
+                                @endphp
                                 @foreach ($product_tersedia as $ps)
-                                    <div class="flex items-center justify-between w-full">
+                                    <div class="flex items-center content-center justify-between w-full">
                                         <div class="flex items-center w-fit gap-4 h-20">
-                                            <div class="flex items-center mb-4">
+                                            <div class="flex items-center">
                                                 <input id="default-checkbox" type="checkbox" value=""
                                                     name="checkout[]"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -74,7 +79,7 @@
                                                 <img class="h-auto w-full max-h-full" src="https://placehold.co/600x400" />
                                             </a>
                                             <a href="{{ route('post-product-detail', $ps['product_id']) }}"
-                                                class="hover:underline">{{ $ps['name'] }}</a>
+                                                class="hover:underline text-gray-700 dark:text-gray-200">{{ $ps['name'] }}</a>
                                         </div>
                                         <div class="flex flex-col  items-center w-6/12">
                                             <div class="flex items-center justify-between content-center">
@@ -84,9 +89,11 @@
                                                 </span>
                                                 <div class="relative flex items-center max-w-[8rem] me-4">
                                                     <!-- Decrement Button -->
-                                                    <button type="button" id="decrement-button"
-                                                        data-input-counter-decrement="quantity-input"
-                                                        class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                    <button type="button" id="decrement-button-{{ $i }}"
+                                                        data-input-counter-decrement="quantity-input-{{ $i }}"
+                                                        class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                                                        onclick="submitformQty(this.form)"
+                                                        form="qty-form-{{ $i }}">
                                                         <svg class="w-3 h-3 text-gray-900 dark:text-white"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             fill="none" viewBox="0 0 18 2">
@@ -96,27 +103,109 @@
                                                     </button>
 
                                                     <!-- Quantity Input -->
-                                                    <input type="text" id="quantity-input" name="qty[]"
+                                                    <input type="text" input-qty="quantity-input-{{ $i }}"
+                                                        form="qty-form-{{ $i }}" onchange="this.form.submit()"
+                                                        name="qty" id = "quantity-input-{{ $i }}"
                                                         data-input-counter data-input-counter-min="1"
                                                         class="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                         value="{{ $ps['qty'] }}" min="1" required />
+                                                    <input type="hidden" name="cart-id" value="{{ $ps['cart_id'] }}"
+                                                        form="qty-form-{{ $i }}" />
+                                                    <form action="{{ route('user.update.cart.qty') }}" method="post"
+                                                        id="qty-form-{{ $i }}" class="hidden">
+                                                        @csrf
+                                                    </form>
 
                                                     <!-- Increment Button -->
-                                                    <button type="button" id="increment-button"
-                                                        data-input-counter-increment="quantity-input"
-                                                        class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
+                                                    <button type="button" id="increment-button-{{ $i }}"
+                                                        data-input-counter-increment="quantity-input-{{ $i }}"
+                                                        class="bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none"
+                                                        onclick="submitformQty(this.form)"
+                                                        form="qty-form-{{ $i }}">
                                                         <svg class="w-3 h-3 text-gray-900 dark:text-white"
                                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                             fill="none" viewBox="0 0 18 18">
                                                             <path stroke="currentColor" stroke-linecap="round"
                                                                 stroke-linejoin="round" stroke-width="2"
-                                                                d="M9 1v16M1 9h16" />
+                                                                d=" M9 1v16M1 9h16" />
                                                         </svg>
                                                     </button>
+                                                    <script>
+                                                        function submitformQty(form) {
+                                                            setTimeout(function() {
+                                                                form.submit();
+                                                            }, 400);
+                                                        }
+                                                    </script>
+                                                    @php
+                                                        $i++;
+                                                    @endphp
                                                 </div> <span
                                                     class="text-sm font-semibold text-gray-700 dark:text-gray-200">Rp.
                                                     {{ number_format($ps['price'] * $ps['qty']) }}</span>
                                                 </span>
+
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center content-center w-fit gap-4 h-20">
+                                            <div class="flex items-center">
+                                                <form action="{{ route('user.remove.from.cart') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="cart_id" value="{{ $ps['cart_id'] }}">
+                                                    <button type="submit" class="text-red-500 hover:text-red-600"><i
+                                                            class="fa-solid fa-trash-can"></i></button>
+
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg">
+                            <div
+                                class="flex items
+                                -center justify-between px-6 py-4 border-b dark:border-gray-700">
+                                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-200">Produk Tidak Tersedia
+                                </h3>
+                            </div>
+
+                            <div id="pesanan" class="px-6 py-4">
+                                @php
+                                    $i = 1;
+                                @endphp
+                                @foreach ($product_habis as $ph)
+                                    <div class="flex items-center content-center justify-between w-full">
+                                        <div class="flex items-center w-5/12 gap-4 h-20">
+                                            <a href="{{ route('post-product-detail', $ph['product_id']) }}"
+                                                target="_blank"
+                                                class="flex items-center aspect-square w-20 h-20 shrink-0">
+                                                <img class="h-auto w-full max-h-full"
+                                                    src="https://placehold.co/600x400" />
+                                            </a>
+                                            <a href="{{ route('post-product-detail', $ph['product_id']) }}"
+                                                class="hover:underline text-gray-700 dark:text-gray-200">{{ $ph['name'] }}</a>
+                                        </div>
+                                        <div class="flex flex-col items-end w-6/12">
+                                            <div class="flex items-end justify-between">
+                                                <span
+                                                    class="text-sm font-semibold text-gray-700 dark:text-gray-200 me-4">Rp.
+                                                    {{ number_format($ph['price']) }}</span>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center content-center w-fit gap-4 h-20">
+                                            <div class="flex items-center">
+                                                <form action="{{ route('user.remove.from.cart') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="cart_id" value="{{ $ph['cart_id'] }}">
+                                                    <button type="submit" class="text-red-500 hover:text-red-600"><i
+                                                            class="fa-solid fa-trash-can"></i></button>
+
+                                                </form>
 
                                             </div>
                                         </div>
@@ -148,8 +237,7 @@
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
         <script>
             $(document).ready(function() {
                 function calculateTotal() {
@@ -165,6 +253,7 @@
                 $('input[name="checkout[]"]').change(function() {
                     calculateTotal();
                 });
+                calculateTotal();
 
                 $('#checkout-button').click(function() {
                     let product_id = [];
@@ -188,7 +277,7 @@
                     $('#checkout-form').submit();
                 });
 
-                calculateTotal();
+
             });
         </script>
 
