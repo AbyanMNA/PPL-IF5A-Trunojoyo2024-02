@@ -16,10 +16,10 @@ class ProfileController extends Controller
     public function showProfile()
     {
         $user = Auth::user();
-        
+
         // Get the address associated with the user
         $alamat = Alamat::where('user_id', $user->id)->first(); // Retrieve the first address for the logged-in user
-        
+
         return view('User.Index', compact('user', 'alamat')); // Pass both user and alamat to the view
     }
 
@@ -72,59 +72,58 @@ class ProfileController extends Controller
     public function updatePhoto(Request $request)
     {
         $user = Auth::user();
-    
+
         $request->validate([
             'photo' => 'required|image|max:2048',
         ]);
-    
+
         // Hapus foto lama jika ada
         if ($user->photo) {
             Storage::delete('public/' . $user->photo);
         }
-    
+
         // Menggunakan nama asli file
         $file = $request->file('photo');
         $fileName = 'photos/' . $file->getClientOriginalName();
-    
+
         // Memastikan nama file unik untuk menghindari konflik
         $path = $file->storeAs('public', $fileName);
-    
+
         $user->photo = $fileName; // Menyimpan path lengkap ke database
-    
+
         $user->save();
-    
+
         // Bersihkan cache view
         Artisan::call('view:clear');
         Artisan::call('cache:clear');
         Artisan::call('config:clear');
         Artisan::call('route:clear');
-        
+
         Alert::success('Photo updated successfully!');
         return redirect()->back()->with('success', 'Photo updated successfully!');
     }
-    
+
     public function deletePhoto()
     {
         $user = Auth::user();
-    
+
         // Hapus foto jika ada
         if ($user->photo) {
             Storage::delete('public/photos/' . $user->photo);
             $user->photo = null;
             $user->save();
         }
-    
+
         // Set user ke Auth untuk memastikan data terbaru
         Auth::setUser($user);
-    
+
         // Bersihkan cache view
         Artisan::call('view:clear');
         Artisan::call('cache:clear');
         Artisan::call('config:clear');
         Artisan::call('route:clear');
-    
+
         Alert::success('Photo deleted successfully!');
         return redirect()->back()->with('success', 'Photo deleted successfully!');
     }
-
 }
