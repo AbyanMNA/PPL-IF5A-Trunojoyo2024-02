@@ -48,7 +48,7 @@
                                 @csrf
                                 <div class="mb-5">
                                     <label for="first_name"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
+                                        class="block mb-2 text-sm font-medium text-gray-900 ">First
                                         Name</label>
                                     <input type="text" name="first_name" id="first_name"
                                         value="{{ old('first_name', $user->first_name) }}"
@@ -57,7 +57,7 @@
                                 </div>
                                 <div class="mb-5">
                                     <label for="last_name"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
+                                        class="block mb-2 text-sm font-medium text-gray-900 ">Last
                                         Name</label>
                                     <input type="text" name="last_name" id="last_name"
                                         value="{{ old('last_name', $user->last_name) }}"
@@ -66,12 +66,13 @@
                                 </div>
                                 <div class="mb-5">
                                     <label for="email"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
+                                        class="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
                                     <input type="email" name="email" id="email"
                                         value="{{ old('email', $user->email) }}"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="your email" />
                                 </div>
+                                
                                 
                                 <div class="flex justify-end">
                                     <button type="reset"
@@ -79,14 +80,23 @@
                                     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md">Save</button>
                                 </div>
                             </form>
-                            <div class="mb-5">
-                                <label for="password"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                            <div class="mb-5 flex justify-between">
+                                <div>
+                                    <label for="password"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                                     <button data-modal-target="passwordModal" data-modal-toggle="passwordModal"
-                                    class="bg-blue-600 text-white px-4 py-2 rounded-md">Ubah
-                                    Password</button>
+                                        class="bg-blue-600 text-white px-4 py-2 rounded-md">Ubah
+                                        Password</button>
+                                </div>
+                                <div>
+                                    <label for="alamat"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
+                                    <button data-modal-target="alamat-modal" data-modal-toggle="alamat-modal"
+                                        class="text-sm font-semibold bg-blue-600 px-4 py-2 rounded-md text-white hover:underline">Ubah Alamat</button>
+                                </div>
                             </div>
                         </div>
+                        
 
                         <div class="bg-white p-6 rounded-lg shadow-md h-[22rem]">
                             <h2 class="text-xl font-semibold mb-4">Your Photo</h2>
@@ -167,7 +177,95 @@
     </div>
 </div>
 </div>
+{{-- alamat --}}
+<div id="alamat-modal" tabindex="-1" aria-hidden="true"
+    class="hidden overflow-y-auto overflow-x-hidden fixed lg:mt-0 top-20 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-screen-52 lg:max-w-screen-sm min-h-screen py-20">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 mt-20">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Alamat Pengiriman
+                </h3>
+                <button type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-toggle="alamat-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form class="p-4 md:p-5" id="alamat-form">
+                @csrf
+                <div class="grid gap-2 mb-4 grid-cols-2">
+                    <div class="col-span-2">
+                        <label for="alamat_lengkap"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat Lengkap</label>
+                        <input type="text" name="alamat_lengkap" id="alamat_lengkap"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Masukan Alamat Lengkap" required
+                            value="@if (!empty($alamat)) {{ $alamat->alamat_lengkap }} @endif">
+                    </div>
+                    <div class="col-span-2">
+                        <label for="kelurahan"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kelurahan</label>
+                        <input type="text" name="kelurahan" id="kelurahan"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Kelurahan"
+                            value="@if (!empty($alamat)) {{ $alamat->kelurahan }} @endif">
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="kecamatan"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kecamatan</label>
+                        <input type="text" name="kecamatan" id="kecamatan"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Kecamatan"
+                            value="@if (!empty($alamat)) {{ $alamat->kecamatan }} @endif">
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="kabupaten"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kabupaten</label>
+                        <input type="text" name="kabupaten" id="kabupaten"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Kabupaten"
+                            value="@if (!empty($alamat)) {{ $alamat->kabupaten }} @endif">
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="provinsi"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provinsi</label>
+                        <input type="text" name="provinsi" id="provinsi"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Provinsi" required
+                            value="@if (!empty($alamat)) {{ $alamat->provinsi }} @endif">
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="kode_post"
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Post</label>
+                        <input type="text" name="kode_post" id="kode_post"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            placeholder="Masukkan kode post" required
+                            value="@if (!empty($alamat)) {{ $alamat->kode_pos }} @endif">
+                    </div>
+                </div>
+            </form>
+            <!-- Modal footer -->
+            <div class="flex items-center justify-end p-4 md:p-5 border-t rounded-b dark:border-gray-600">
+                <button type="button"
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                    data-modal-toggle="alamat-modal">Batal</button>
+                <button type="button" id="save-alamat"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ms-2">Simpan</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     document.getElementById('update-photo-button').addEventListener('click', function() {
         document.getElementById('update-photo-modal').classList.remove('hidden');
@@ -176,5 +274,38 @@
     document.getElementById('cancel-update-button').addEventListener('click', function() {
         document.getElementById('update-photo-modal').classList.add('hidden');
     });
+    $(document).ready(function() {
+            $('#save-alamat').click(function() {
+                $.ajax({
+                    url: "{{ route('ubah-alamat') }}",
+                    type: "POST",
+                    data: $('#alamat-form').serialize(),
+                    success: function(response) {
+                        if (response.success === true) {
+                            Swal.fire({
+                                title: 'Alamat berhasil diubah',
+                                icon: 'success',
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            console.log(response);
+                            Swal.fire({
+                                title: 'Gagal mengubah alamat',
+                                icon: 'error',
+                            });
+                        }
+                    },
+                    error: function(response) {
+                        Swal.fire({
+                            title: 'Terjadi kesalahan',
+                            icon: 'error',
+                        });
+                    }
+                });
+            });
+        });
 </script>
 @endsection

@@ -86,55 +86,7 @@
                                 </div>
                             </div>
 
-                            <!-- Filter Merchant -->
-                            <div class="pt-4">
-                                <h3 class="text-xl dark:text-white mb-3 uppercase font-medium">Merchant</h3>
-                                <div class="space-y-2">
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="merchant[]" value="cafe" id="brand-1"
-                                            class="focus:ring-0 rounded-sm cursor-pointer dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                            {{ in_array('cafe', request('merchant', [])) ? 'checked' : '' }}
-                                            onchange="document.getElementById('filter-form').submit();">
-                                        <label for="brand-1" class="dark:text-white ml-3 cursor-pointer">Cafe</label>
-                                        {{-- <div class="ml-auto dark:text-white text-sm">(15)</div> --}}
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="merchant[]" value="lapak_mahasiswa" id="brand-2"
-                                            class="focus:ring-0 rounded-sm cursor-pointer dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                            {{ in_array('lapak_mahasiswa', request('merchant', [])) ? 'checked' : '' }}
-                                            onchange="document.getElementById('filter-form').submit();">
-                                        <label for="brand-2" class="dark:text-white ml-3 cursor-pointer">Lapak
-                                            Mahasiswa</label>
-                                        {{-- <div class="ml-auto dark:text-white text-sm">(9)</div> --}}
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="merchant[]" value="pedagang_keliling" id="brand-3"
-                                            class="focus:ring-0 rounded-sm cursor-pointer dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                            {{ in_array('pedagang_keliling', request('merchant', [])) ? 'checked' : '' }}
-                                            onchange="document.getElementById('filter-form').submit();">
-                                        <label for="brand-3" class="dark:text-white ml-3 cursor-pointer">Pedagang
-                                            Keliling</label>
-                                        {{-- <div class="ml-auto dark:text-white text-sm">(21)</div> --}}
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="merchant[]" value="umkm" id="brand-4"
-                                            class="focus:ring-0 rounded-sm cursor-pointer dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                            {{ in_array('umkm', request('merchant', [])) ? 'checked' : '' }}
-                                            onchange="document.getElementById('filter-form').submit();">
-                                        <label for="brand-4" class="dark:text-white ml-3 cursor-pointer">UMKM</label>
-                                        {{-- <div class="ml-auto dark:text-white text-sm">(10)</div> --}}
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="merchant[]" value="warung_makan" id="brand-5"
-                                            class="focus:ring-0 rounded-sm cursor-pointer dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                            {{ in_array('warung_makan', request('merchant', [])) ? 'checked' : '' }}
-                                            onchange="document.getElementById('filter-form').submit();">
-                                        <label for="brand-5" class="dark:text-white ml-3 cursor-pointer">Warung
-                                            Makan</label>
-                                        {{-- <div class="ml-auto dark:text-white text-sm">(10)</div> --}}
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <!-- Filter Harga -->
                             <div class="pt-4">
@@ -248,56 +200,7 @@
                                 </div>
                             </div>
 
-                            <!-- Filter Merchant -->
-                            <div class="pt-4">
-                                <h3 class="text-xl dark:text-white mb-3 uppercase font-medium">Merchant</h3>
-                                <div class="space-y-2">
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="merchant[]" value="cafe" id="brand-1"
-                                            class="focus:ring-0 rounded-sm cursor-pointer dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                            {{ in_array('cafe', request('merchant', [])) ? 'checked' : '' }}
-                                            onchange="document.getElementById('filter-form-desktop').submit();">
-                                        <label for="brand-1" class="dark:text-white ml-3 cursor-pointer">Cafe</label>
-                                        {{-- <div class="ml-auto dark:text-white text-sm">(15)</div> --}}
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="merchant[]" value="lapak_mahasiswa" id="brand-2"
-                                            class="focus:ring-0 rounded-sm cursor-pointer dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                            {{ in_array('lapak_mahasiswa', request('merchant', [])) ? 'checked' : '' }}
-                                            onchange="document.getElementById('filter-form-desktop').submit();">
-                                        <label for="brand-2" class="dark:text-white ml-3 cursor-pointer">Lapak
-                                            Mahasiswa</label>
-                                        {{-- <div class="ml-auto dark:text-white text-sm">(9)</div> --}}
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="merchant[]" value="pedagang_keliling"
-                                            id="brand-3"
-                                            class="focus:ring-0 rounded-sm cursor-pointer dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                            {{ in_array('pedagang_keliling', request('merchant', [])) ? 'checked' : '' }}
-                                            onchange="document.getElementById('filter-form-desktop').submit();">
-                                        <label for="brand-3" class="dark:text-white ml-3 cursor-pointer">Pedagang
-                                            Keliling</label>
-                                        {{-- <div class="ml-auto dark:text-white text-sm">(21)</div> --}}
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="merchant[]" value="umkm" id="brand-4"
-                                            class="focus:ring-0 rounded-sm cursor-pointer dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                            {{ in_array('umkm', request('merchant', [])) ? 'checked' : '' }}
-                                            onchange="document.getElementById('filter-form-desktop').submit();">
-                                        <label for="brand-4" class="dark:text-white ml-3 cursor-pointer">UMKM</label>
-                                        {{-- <div class="ml-auto dark:text-white text-sm">(10)</div> --}}
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input type="checkbox" name="merchant[]" value="warung_makan" id="brand-5"
-                                            class="focus:ring-0 rounded-sm cursor-pointer dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
-                                            {{ in_array('warung_makan', request('merchant', [])) ? 'checked' : '' }}
-                                            onchange="document.getElementById('filter-form-desktop').submit();">
-                                        <label for="brand-5" class="dark:text-white ml-3 cursor-pointer">Warung
-                                            Makan</label>
-                                        {{-- <div class="ml-auto dark:text-white text-sm">(10)</div> --}}
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <!-- Filter Harga -->
                             <div class="pt-4">

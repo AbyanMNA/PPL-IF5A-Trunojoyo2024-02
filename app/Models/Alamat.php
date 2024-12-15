@@ -22,4 +22,9 @@ class Alamat extends Model
         'kode_pos',
         'user_id',
     ];
+
+    public function alamat()
+    {
+        return $this->hasOne(Alamat::class);
+    }
 }

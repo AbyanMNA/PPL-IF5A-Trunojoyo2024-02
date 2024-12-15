@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Alamat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,11 @@ class ProfileController extends Controller
     public function showProfile()
     {
         $user = Auth::user();
-        return view('User.Index', compact('user'));
+        
+        // Get the address associated with the user
+        $alamat = Alamat::where('user_id', $user->id)->first(); // Retrieve the first address for the logged-in user
+        
+        return view('User.Index', compact('user', 'alamat')); // Pass both user and alamat to the view
     }
 
     public function updateProfile(Request $request)
