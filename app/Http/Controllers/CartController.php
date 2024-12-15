@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\Merchant;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -40,9 +41,29 @@ class CartController extends Controller
                 ];
             }
         }
+
+        $grouped_products = [];
+        foreach ($product_tersedia as $product) {
+            $grouped_products[$product['merchant_id']]['habis'] = [];
+            $merchant_id = $product['merchant_id'];
+            $merchant = Merchant::where('id', $merchant_id)->first();
+            $grouped_products[$product['merchant_id']]['merchant'] = $merchant;
+            $grouped_products[$product['merchant_id']]['tersedia'][] = $product;
+        }
+
+        foreach ($product_habis as $product) {
+            $merchant_id = $product['merchant_id'];
+            $merchant = Merchant::where('id', $merchant_id)->first();
+            $grouped_products[$product['merchant_id']]['merchant'] = $merchant;
+            if (!isset($grouped_products[$product['merchant_id']]['tersedia'])) {
+                $grouped_products[$product['merchant_id']]['tersedia'] = [];
+            }
+            $grouped_products[$product['merchant_id']]['habis'][] = $product;
+        }
+        // dd($grouped_products);
         return view('User.Pages.cart', [
-            'product_habis' => $product_habis,
-            'product_tersedia' => $product_tersedia
+            'grouped_products' => $grouped_products
+
         ]);
     }
 
