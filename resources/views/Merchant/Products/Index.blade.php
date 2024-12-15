@@ -23,7 +23,7 @@
             </nav>
             <h2 class="mb-4 text-3xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white md:text-4xl">
                 Daftar Postingan Produk</h2>
-     
+
 
             <div class="px-2 mx-auto max-w-screen-2xl lg:px-2">
                 <div class="relative overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
@@ -64,7 +64,7 @@
                         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                 <tr>
-                            
+
                                     <th scope="col" class="px-4 py-3">Produk</th>
                                     <th scope="col" class="px-4 py-3">Kategori</th>
                                     <th scope="col" class="px-4 py-3">Stock</th>
@@ -78,11 +78,11 @@
                             <tbody>
                                 @foreach ($products as $product)
                                     <tr class="border-b dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700">
-                                   
+
                                         <th scope="row"
                                             class="flex items-center px-4 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            <img src="{{ asset('storage/' . $product->photo) }}"
-                                                alt="iMac Front Image" class="w-auto h-8 mr-3">
+                                            <img src="{{ asset('storage/' . $product->photo) }}" alt="Product Photo"
+                                                class="w-auto h-8 mr-3">
                                             {{ $product->name }}
                                         </th>
                                         <td class="px-4 py-2">
@@ -133,9 +133,9 @@
                                                     </svg>
                                                 @endif
                                                 @for ($i = 0; $i < $emptyStars; $i++)
-                                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400"
-                                                        fill="none" stroke="currentColor" stroke-width="1"
-                                                        viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg aria-hidden="true" class="w-5 h-5 text-yellow-400" fill="none"
+                                                        stroke="currentColor" stroke-width="1" viewbox="0 0 20 20"
+                                                        xmlns="http://www.w3.org/2000/svg">
                                                         <path
                                                             d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                                                     </svg>
@@ -174,25 +174,29 @@
                                                 <ul class="py-1 text-sm text-gray-700 dark:text-gray-200"
                                                     aria-labelledby="{{ $product->id }}-dropdown-button">
                                                     <li>
-                                                        <a href="{{ route('merchant.products.edit', $product->id)}}"
+                                                        <a href="{{ route('merchant.products.edit', $product->id) }}"
                                                             class=" block py-1 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
                                                     </li>
 
                                                 </ul>
                                                 <div class="py-1" x-data>
-                                                    <form id="deleteForm-{{ $product->id }}" action="{{ route('merchant.products.destroy', ['product' => $product->id]) }}" method="POST" class="inline-block">
+                                                    <form id="deleteForm-{{ $product->id }}"
+                                                        action="{{ route('merchant.products.destroy', ['product' => $product->id]) }}"
+                                                        method="POST" class="inline-block">
                                                         @method('delete')
                                                         @csrf
-                                                        <button type="button" onclick="return confirmDelete({{ $product->id }})" class="w-full text-center mx-auto py-2 ps-4 pe-28 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                                                        <button type="button"
+                                                            onclick="return confirmDelete({{ $product->id }})"
+                                                            class="w-full text-center mx-auto py-2 ps-4 pe-28 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
                                                             Delete
                                                         </button>
                                                     </form>
                                                 </div>
-                                                
+
                                             </div>
                                         </td>
                                     </tr>
-                             @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -207,4 +211,3 @@
 
 
 @endsection
-

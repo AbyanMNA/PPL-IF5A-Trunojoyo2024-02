@@ -19,6 +19,8 @@ class Product extends Model
         'rating',
         'status',
         'photo',
+        'photo2',
+        'photo3',
         'merchant_id',
     ];
 

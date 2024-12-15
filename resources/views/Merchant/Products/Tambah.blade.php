@@ -9,12 +9,40 @@
                 <form action="{{ route('merchant.products.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-4">
-                        <label class="block font-medium mb-1 pl-2 lg:pl-20">Foto Produk</label>
-                        <div
-                            class="h-20 w-20 ml-2 lg:ml-[12rem] border-dashed border-2 border-zinc-300 dark:border-zinc-600 rounded-lg text-center">
-                            <input type="file" name="photo" class="hidden" id="product-photo">
-                            <button type="button" onclick="document.getElementById('product-photo').click()"
-                                class="text-red-600 text-xs mt-5">Tambahkan Foto (0/1)</button>
+                        <label class="block font-medium mb-1">Foto Produk</label>
+                        <div class="flex ml-4 lg:ml-[16rem] space-x-4">
+                            <!-- Frame Foto 1 -->
+                            <div
+                                class="h-20 w-20 border-dashed border-2 border-zinc-300 dark:border-zinc-600 rounded-lg text-center relative">
+                                <input type="file" name="photo" class="hidden" id="product-photo-1" accept="image/*"
+                                    onchange="previewImage(1)">
+                                <button type="button" onclick="document.getElementById('product-photo-1').click()"
+                                    class="text-red-600 text-xs mt-5">Tambahkan Foto 1</button>
+                                <img id="image-preview-1" src="" alt="Pratinjau Gambar 1"
+                                    class="absolute top-0 left-0 w-full h-full object-cover rounded-lg hidden">
+                            </div>
+
+                            <!-- Frame Foto 2 -->
+                            <div
+                                class="h-20 w-20 border-dashed border-2 border-zinc-300 dark:border-zinc-600 rounded-lg text-center relative">
+                                <input type="file" name="photo2" class="hidden" id="product-photo-2" accept="image/*"
+                                    onchange="previewImage(2)">
+                                <button type="button" onclick="document.getElementById('product-photo-2').click()"
+                                    class="text-red-600 text-xs mt-5">Tambahkan Foto 2</button>
+                                <img id="image-preview-2" src="" alt="Pratinjau Gambar 2"
+                                    class="absolute top-0 left-0 w-full h-full object-cover rounded-lg hidden">
+                            </div>
+
+                            <!-- Frame Foto 3 -->
+                            <div
+                                class="h-20 w-20 border-dashed border-2 border-zinc-300 dark:border-zinc-600 rounded-lg text-center relative">
+                                <input type="file" name="photo3" class="hidden" id="product-photo-3" accept="image/*"
+                                    onchange="previewImage(3)">
+                                <button type="button" onclick="document.getElementById('product-photo-3').click()"
+                                    class="text-red-600 text-xs mt-5">Tambahkan Foto 3</button>
+                                <img id="image-preview-3" src="" alt="Pratinjau Gambar 3"
+                                    class="absolute top-0 left-0 w-full h-full object-cover rounded-lg hidden">
+                            </div>
                         </div>
                     </div>
 
@@ -79,4 +107,21 @@
             </div>
         </div>
     </section>
+    <script>
+        function previewImage(index) {
+            const input = document.getElementById(`product-photo-${index}`);
+            const preview = document.getElementById(`image-preview-${index}`);
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('hidden');
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 @endsection

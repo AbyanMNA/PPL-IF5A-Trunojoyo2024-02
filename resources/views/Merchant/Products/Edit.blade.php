@@ -80,11 +80,26 @@
                 </div>
             @enderror
             <div class="block rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-800">
-                <dl>
-                    <dd class="mb-6 font-light text-gray-500 dark:text-gray-400">
-                        <img class="size-30 rounded-lg" src="{{ asset('storage/' . $product->photo) }}" alt="Helene avatar">
-                    </dd>
-                </dl>
+                <div class="flex flex-row gap-2 flex-grow-0">
+                    <dl class="w-1/3">
+                        <dd class="mb-6 w-fit font-light text-gray-500 dark:text-gray-400">
+                            <img class="size-30 rounded-lg" src="{{ asset('storage/' . $product->photo) }}"
+                                alt="Product Image 1">
+                        </dd>
+                    </dl>
+                    <dl class="w-1/3">
+                        <dd class="mb-6 w-fit font-light text-gray-500 dark:text-gray-400">
+                            <img class="size-30 rounded-lg" src="{{ asset('storage/' . $product->photo2) }}"
+                                alt="Product Image 2">
+                        </dd>
+                    </dl>
+                    <dl class="w-1/3">
+                        <dd class="mb-6 w-fit font-light text-gray-500 dark:text-gray-400">
+                            <img class="size-30 rounded-lg" src="{{ asset('storage/' . $product->photo3) }}"
+                                alt="Product Image 3">
+                        </dd>
+                    </dl>
+                </div>
                 <form action="{{ route('merchant.products.update', ['product' => $product->id]) }}" method="POST"
                     enctype="multipart/form-data">
                     @method('put')
@@ -162,10 +177,28 @@
                     </div>
                     <div class="mb-6">
                         <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-                            for="file_input">Photo</label>
+                            for="file_input">Photo1</label>
                         <input
                             class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
-                            id="file_input" name="photo" type="file" aria-describedby="file_input_help">
+                            id="file_input" name="photo1" type="file" aria-describedby="file_input_help">
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG or JPG
+                            (MAX. 2MB).</p>
+                    </div>
+                    <div class="mb-6">
+                        <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                            for="file_input">Photo2</label>
+                        <input
+                            class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
+                            id="file_input" name="photo2" type="file" aria-describedby="file_input_help">
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG or JPG
+                            (MAX. 2MB).</p>
+                    </div>
+                    <div class="mb-6">
+                        <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+                            for="file_input">Photo3</label>
+                        <input
+                            class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
+                            id="file_input" name="photo3" type="file" aria-describedby="file_input_help">
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">PNG or JPG
                             (MAX. 2MB).</p>
                     </div>

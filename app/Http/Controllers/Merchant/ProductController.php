@@ -66,7 +66,10 @@ class ProductController extends Controller
                 'required',
                 Rule::in(['tersedia', 'habis']),
             ],
-            'photo' => 'nullable|file|mimes:jpg,png|max:2048',
+            'photo' => ['nullable', 'file', 'mimes:jpg,png', 'max:2048'],
+            'photo2' => ['nullable', 'file', 'mimes:jpg,png', 'max:2048'],
+            'photo3' => ['nullable', 'file', 'mimes:jpg,png', 'max:2048'],
+
         ]);
 
         if ($request->hasFile('photo')) {
@@ -74,6 +77,20 @@ class ProductController extends Controller
             $fileName = 'product_photos/' . $file->getClientOriginalName();
             $file->storeAs('public', $fileName);
             $validated['photo'] = $fileName;
+        }
+
+        if ($request->hasFile('photo2')) {
+            $file = $request->file('photo2');
+            $fileName = 'product_photos/' . $file->getClientOriginalName();
+            $file->storeAs('public', $fileName);
+            $validated['photo2'] = $fileName;
+        }
+
+        if ($request->hasFile('photo3')) {
+            $file = $request->file('photo3');
+            $fileName = 'product_photos/' . $file->getClientOriginalName();
+            $file->storeAs('public', $fileName);
+            $validated['photo3'] = $fileName;
         }
 
         $validated['merchant_id'] = $merchantId;
@@ -144,6 +161,8 @@ class ProductController extends Controller
                 Rule::in(['tersedia', 'habis']),
             ],
             'photo' => ['nullable', 'file', 'mimes:jpg,png', 'max:2048'],
+            'photo2' => ['nullable', 'file', 'mimes:jpg,png', 'max:2048'],
+            'photo3' => ['nullable', 'file', 'mimes:jpg,png', 'max:2048'],
             'promotion_photos.*' => ['nullable', 'file', 'mimes:jpg,png', 'max:2048'],
         ]);
 
@@ -152,6 +171,20 @@ class ProductController extends Controller
             $fileName = 'product_photos/' . $file->getClientOriginalName();
             $file->storeAs('public', $fileName);
             $validated['photo'] = $fileName;
+        }
+
+        if ($request->hasFile('photo2')) {
+            $file = $request->file('photo2');
+            $fileName = 'product_photos/' . $file->getClientOriginalName();
+            $file->storeAs('public', $fileName);
+            $validated['photo2'] = $fileName;
+        }
+
+        if ($request->hasFile('photo3')) {
+            $file = $request->file('photo3');
+            $fileName = 'product_photos/' . $file->getClientOriginalName();
+            $file->storeAs('public', $fileName);
+            $validated['photo3'] = $fileName;
         }
 
         // Handle multiple promotion photos (if applicable)
