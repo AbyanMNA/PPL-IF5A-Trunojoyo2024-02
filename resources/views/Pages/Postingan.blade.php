@@ -395,7 +395,7 @@
                                                 {{ $product->merchant->address }} </p>
                                         </a>
                                         <a href="{{ route('merch-info', $product->merchant->id) }}">
-                                            <p class="text-[10px] lg:text-sm font-bold">[ {{ $product->merchant->type }} ]
+                                            <p class="text-[10px] lg:text-sm font-bold">[ {{ $product->category['name'] }} ]
                                             </p>
                                             <p class="text-xs">{{ $product->merchant->name }} </p>
                                         </a>
