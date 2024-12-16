@@ -39,16 +39,10 @@
                         class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Merchant</a>
                 </li>
                 <li>
-                    @if ($user)
-                        <a href="{{ route('global') }}"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Global
-                            chat</a>
-                    @elseif ($merchant)
-                        <a href="{{ route('merchant.global') }}"
-                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Global
-                            chat</a>
-                    @endif
-
+                    <a href="{{ route('layanan', ['kategori' => 'nama-kategori']) }}"
+                        class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-[#2196F3] md:py-2.5 dark:text-white md:dark:hover:text-[#2196F3] dark:hover:bg-gray-700 dark:hover:text-white">
+                        Layanan
+                     </a>
                 </li>
                 <li>
                     <a href="{{ route('contact') }}"

@@ -88,7 +88,7 @@
                                     Email Address
                                 </h4>
                                 <p class="text-base text-body-color dark:text-dark-6">
-                                    jajanutm@gmail.com
+                                    GooBuy@gmail.com
                                 </p>
                             </div>
                         </div>
