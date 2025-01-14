@@ -19,8 +19,8 @@ Opsional:
 3. Ke folder/direktori yang sudah diklon
 4. Salin `.env.example` dengan cara `copy .env.example .env` atau `cp .env.example .env`
 5. Konfigurasi `vite.config.js` dan `.env` dengan teks editor biasa
-6. Pada `.env`, konfigurasi harus hati-hati dalam isian `DB_CONNECTION`, `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` sesuai dengan server terpilih yang akan dijalankan<br/>
-   Untuk menggunakan SQLite, isian `DB_DATABASE` adalah alamat berkas lokal server tersebut. Misalkan `E:\\UthabitiKachinaDatabase\\kachina.kachina` atau misal `/home/uthabitikachina/database/kachina.sqlite`
+6. Pada `.env`, konfigurasi harus hati-hati dalam isian `DB_CONNECTION`, `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` sesuai dengan server terpilih yang akan dijalankan.<br/>
+   Untuk menggunakan SQLite, isian `DB_DATABASE` adalah alamat berkas lokal server tersebut. Misalkan `E:\\UthabitiKachinaDatabase\\kachina.kachina` atau misal `/home/uthabitikachina/database/kachina.sqlite`. Bisa didapatkan dengan cara komentarkan `DB_DATABASE=` menjadi `#DB_DATABASE=` untuk DBMS dengan SQLite.
 8. Jalankan `composer install`
 9. Jalankan `npm install`
 10. Untuk selain SQLite atau SQL yang berbasis berkas jalankan server SQL terlebih dahulu, lalu jalankan perintah `php artisan migrate` dan `php artisan key:generate`
@@ -40,3 +40,12 @@ Opsional:
   });
   ```
 - Admin tidak ada, tidak bisa? Sebenarnya pengguna admin tidak ada. Jadi isi manual, untuk passwd harus telah terenkripsi dengan Bcrypt.
+- Masalah `php artisan migrate` pada kasus databse berkaitan SQLite akibat berkas database (`.sqlite`) tidak ditemukan? Dalam berkas `.env` seharusnya
+  ```.env
+  DB_CONNECTION=sqlite
+  # DB_HOST=localhost
+  # DB_PORT=3306
+  # DB_DATABASE=
+  # DB_USERNAME=root
+  # DB_PASSWORD=
+  ```
